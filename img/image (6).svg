@@ -1,0 +1,25 @@
+<svg class="w-[126px] h-[126px] sm:w-[146px] sm:h-[146px] text-gold-light" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="0.9" opacity="0.8"></circle>
+                          <circle cx="100" cy="100" r="72" stroke="currentColor" stroke-width="0.7" opacity="0.65"></circle>
+                          <circle cx="100" cy="100" r="46" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.7"></circle>
+                          <circle cx="100" cy="100" r="18" stroke="currentColor" stroke-width="0.7" opacity="0.8"></circle>
+                          <!-- Zodiac Spokes -->
+                          <g stroke="currentColor" stroke-width="0.5" opacity="0.45">
+                            <line x1="100" y1="12" x2="100" y2="188"></line>
+                            <line x1="12" y1="100" x2="188" y2="100"></line>
+                            <line x1="38" y1="38" x2="162" y2="162"></line>
+                            <line x1="162" y1="38" x2="38" y2="162"></line>
+                            <line x1="56" y1="24" x2="144" y2="176"></line>
+                            <line x1="144" y1="24" x2="56" y2="176"></line>
+                          </g>
+                          <!-- Geometric Aspects -->
+                          <polygon points="100,28 164,132 36,132" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.85"></polygon>
+                          <polygon points="100,172 158,72 42,72" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.5"></polygon>
+                          <!-- Center Star -->
+                          <path d="M100 88 L103 97 L112 100 L103 103 L100 112 L97 103 L88 100 L97 97 Z" fill="currentColor"></path>
+                          <!-- Planetary dots -->
+                          <circle cx="100" cy="28" r="3" fill="currentColor"></circle>
+                          <circle cx="164" cy="132" r="2.5" fill="currentColor"></circle>
+                          <circle cx="36" cy="132" r="2.5" fill="currentColor"></circle>
+                          <circle cx="148" cy="64" r="2" fill="currentColor"></circle>
+                        </svg>

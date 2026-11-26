@@ -1,0 +1,2253 @@
+<html lang="bg" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astromia — Персонализирана астрологична книга по твоята натална карта</title>
+  <meta name="description" content="Създай своята луксозна персонализирана астрологична книга с твърди корици и златен печат по точната ти дата, час и място на раждане. Безплатен преглед онлайн." />
+
+  <!-- Google Fonts: Literata & Sofia Sans with full Cyrillic support -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,300;1,7..72,400&family=Sofia+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ivory: '#FAF6EE',
+            'ivory-deep': '#F3ECE0',
+            parchment: '#E8DDCC',
+            ink: '#171D2B',
+            'ink-soft': '#2B3345',
+            gold: '#B9975B',
+            'gold-dark': '#96763E',
+            'gold-light': '#D4B882',
+            rose: '#C5A4A0',
+            'rose-soft': '#E9D9D6',
+            muted: '#5F5A52'
+          },
+          fontFamily: {
+            serif: ['Literata', 'Georgia', 'serif'],
+            sans: ['Sofia Sans', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --ivory: #FAF6EE;
+      --ivory-deep: #F3ECE0;
+      --parchment: #E8DDCC;
+      --ink: #171D2B;
+      --gold: #B9975B;
+      --gold-dark: #96763E;
+      --rose: #C5A4A0;
+      --muted: #5F5A52;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background-color: var(--ivory);
+      color: var(--ink);
+      font-family: 'Sofia Sans', system-ui, sans-serif;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4, .font-editorial {
+      font-family: 'Literata', Georgia, serif;
+    }
+
+    /* Subtle paper grain overlay */
+    .paper-texture {
+      background-image:
+        radial-gradient(rgba(185, 151, 91, 0.06) 1px, transparent 0),
+        radial-gradient(rgba(23, 29, 43, 0.025) 1px, transparent 0);
+      background-size: 32px 32px;
+      background-position: 0 0, 16px 16px;
+    }
+
+    /* Supplied white logo converted to antique gold for light ivory header */
+    .logo-gold-filter {
+      filter: brightness(0) saturate(100%) invert(61%) sepia(24%) saturate(560%) hue-rotate(1deg) brightness(86%) contrast(88%);
+    }
+
+    /* Hairline editorial borders */
+    .border-hairline {
+      border-color: rgba(185, 151, 91, 0.28);
+    }
+
+    /* Realistic 3D Hardcover Book Mockup */
+    .book-stage {
+      perspective: 1600px;
+    }
+
+    .book-3d {
+      position: relative;
+      transform: rotateY(-14deg) rotateX(4deg);
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.65s ease;
+      box-shadow:
+        -18px 24px 48px rgba(23, 29, 43, 0.28),
+        -4px 6px 14px rgba(23, 29, 43, 0.16),
+        inset 3px 0 6px rgba(255, 255, 255, 0.14);
+    }
+
+    .book-3d:hover {
+      transform: rotateY(-6deg) rotateX(2deg) translateY(-4px);
+      box-shadow:
+        -12px 30px 56px rgba(23, 29, 43, 0.32),
+        -2px 8px 18px rgba(23, 29, 43, 0.18),
+        inset 3px 0 6px rgba(255, 255, 255, 0.18);
+    }
+
+    .book-spine-crease {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 16px;
+      width: 2px;
+      background: linear-gradient(to right, rgba(0,0,0,0.38), rgba(255,255,255,0.14), rgba(0,0,0,0.12));
+    }
+
+    .book-pages-edge {
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      right: -13px;
+      width: 13px;
+      background: repeating-linear-gradient(
+        to right,
+        #FAF6EE 0px,
+        #EFE6D5 1.5px,
+        #E2D5BE 2.5px
+      );
+      border-radius: 0 3px 3px 0;
+      box-shadow: inset 2px 0 5px rgba(23, 29, 43, 0.16);
+      transform: skewY(-3deg);
+    }
+
+    /* Gold foil embossed typography */
+    .foil-gold {
+      background: linear-gradient(135deg, #E5CC98 0%, #B9975B 42%, #F0DBA8 60%, #9E7C42 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.25));
+    }
+
+    .foil-gold-dark {
+      background: linear-gradient(135deg, #A38044 0%, #7F612D 45%, #C4A265 65%, #846532 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Open Book Spread realistic shadow */
+    .open-spread {
+      background: linear-gradient(
+        to right,
+        #F7F1E5 0%,
+        #FAF6EE 44%,
+        #E8DFCE 49.6%,
+        #D4C8B4 50%,
+        #EFE7D7 50.6%,
+        #FAF6EE 56%,
+        #F5EEE0 100%
+      );
+      box-shadow:
+        0 20px 50px rgba(23, 29, 43, 0.13),
+        0 4px 12px rgba(23, 29, 43, 0.06),
+        inset 0 0 0 1px rgba(185, 151, 91, 0.22);
+    }
+
+    /* Touch targets >= 44px */
+    .touch-target {
+      min-height: 46px;
+    }
+
+    /* Editorial Input Styling */
+    .editorial-input {
+      background-color: #FFFFFF;
+      border: 1px solid rgba(23, 29, 43, 0.16);
+      color: var(--ink);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      min-height: 48px;
+    }
+
+    .editorial-input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(185, 151, 91, 0.18);
+    }
+
+    /* Primary Luxury CTA */
+    .btn-luxury {
+      background-color: var(--ink);
+      color: var(--ivory);
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      min-height: 48px;
+    }
+
+    .btn-luxury:hover {
+      background-color: #242D42;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(23, 29, 43, 0.18);
+    }
+
+    .btn-gold {
+      background-color: var(--gold);
+      color: #FFFFFF;
+      transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+      min-height: 48px;
+    }
+
+    .btn-gold:hover {
+      background-color: var(--gold-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(185, 151, 91, 0.28);
+    }
+
+    /* Subtle celestial line divider */
+    .celestial-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .celestial-divider::before,
+    .celestial-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(185, 151, 91, 0.45), transparent);
+    }
+
+    /* Smooth accordion */
+    .faq-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.32s ease;
+    }
+    .faq-item[data-open="true"] .faq-content {
+      grid-template-rows: 1fr;
+    }
+    .faq-item[data-open="true"] .faq-chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Cover Color Themes */
+    .cover-midnight {
+      background: radial-gradient(circle at 30% 20%, #232C42 0%, #171D2B 68%, #10141F 100%);
+      color: #E8D5AE;
+    }
+    .cover-ivory {
+      background: radial-gradient(circle at 30% 20%, #FCF9F2 0%, #F2E8D8 72%, #E5D6BE 100%);
+      color: #7F612D;
+    }
+    .cover-rose {
+      background: radial-gradient(circle at 30% 20%, #CFAEA9 0%, #BA9590 70%, #A47E79 100%);
+      color: #FAF6EE;
+    }
+
+    /* Hide scrollbar on horizontal snap rails */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-up {
+      animation: fadeSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-ivory text-ink selection:bg-gold/25 selection:text-ink">
+
+  <!-- Top Editorial Announcement Bar -->
+  <div class="bg-ink text-ivory/90 text-xs sm:text-[13px] tracking-wide py-2.5 px-4 border-b border-gold/20">
+    <div class="max-w-[1320px] mx-auto flex items-center justify-center sm:justify-between gap-4">
+      <p class="text-center sm:text-left font-light">
+        <span class="text-gold mr-1.5">✦</span>
+        Безплатна доставка при поръчка на 2 или повече книги
+      </p>
+      <div class="hidden sm:flex items-center gap-5 text-ivory/75">
+        <span>Ръчно подвързана с топъл златен печат</span>
+        <span class="text-gold/60">•</span>
+        <span>Доставка за 3–5 работни дни</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sophisticated Sticky Header -->
+  <header id="site-header" class="sticky top-0 z-40 bg-ivory/95 backdrop-blur-md border-b border-parchment/90 transition-shadow duration-300">
+    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 h-[74px] sm:h-[82px] flex items-center justify-between gap-4">
+      <!-- Brand Logo (Supplied transparent logo rendered in Antique Gold) -->
+      <a href="#" class="flex items-center gap-2 shrink-0 focus:outline-none" aria-label="Astromia Начало">
+        <img
+          src="https://i.postimg.cc/xdFgRPHH/logowhite-removebg-preview.png"
+          alt="Astromia"
+          class="h-8 sm:h-9 w-auto object-contain logo-gold-filter"
+        />
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-8 text-[15px] font-normal text-ink/85" aria-label="Основна навигация">
+        <a href="#whats-inside" class="hover:text-gold-dark transition-colors py-2">Какво съдържа</a>
+        <a href="#craftsmanship" class="hover:text-gold-dark transition-colors py-2">Изработка</a>
+        <a href="#editions" class="hover:text-gold-dark transition-colors py-2">Издания и цени</a>
+        <a href="#gift" class="hover:text-gold-dark transition-colors py-2">За подарък</a>
+        <a href="#reviews" class="hover:text-gold-dark transition-colors py-2">Отзиви</a>
+        <a href="#faq" class="hover:text-gold-dark transition-colors py-2">Въпроси</a>
+      </nav>
+
+      <!-- Desktop Actions -->
+      <div class="hidden lg:flex items-center gap-4">
+        <button onclick="openCheckoutDrawer()" class="relative p-2.5 text-ink/80 hover:text-gold-dark transition-colors" aria-label="Количка">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span id="header-cart-badge" class="hidden absolute top-1 right-0.5 w-4 h-4 rounded-full bg-gold text-white text-[10px] font-semibold flex items-center justify-center">1</span>
+        </button>
+        <a href="#create-book" class="btn-luxury px-6 py-2.5 rounded-full text-sm font-medium tracking-wide inline-flex items-center gap-2">
+          <span>Създай своята книга</span>
+          <svg class="w-4 h-4 text-gold-light" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Mobile Header Actions -->
+      <div class="flex lg:hidden items-center gap-2">
+        <button onclick="openCheckoutDrawer()" class="relative w-11 h-11 flex items-center justify-center text-ink" aria-label="Количка">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span id="mobile-cart-badge" class="hidden absolute top-2 right-1.5 w-4 h-4 rounded-full bg-gold text-white text-[10px] font-semibold flex items-center justify-center">1</span>
+        </button>
+        <button id="mobile-menu-btn" class="w-11 h-11 flex items-center justify-center rounded-full border border-parchment text-ink" aria-label="Отвори меню" aria-expanded="false">
+          <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Responsive Mobile Menu Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-ivory border-b border-parchment px-5 pt-3 pb-6 shadow-xl">
+      <nav class="flex flex-col divide-y divide-parchment/70 text-base font-medium text-ink">
+        <a href="#whats-inside" class="mobile-nav-link py-3.5 flex items-center justify-between">Какво съдържа <span class="text-gold">→</span></a>
+        <a href="#craftsmanship" class="mobile-nav-link py-3.5 flex items-center justify-between">Луксозна изработка <span class="text-gold">→</span></a>
+        <a href="#editions" class="mobile-nav-link py-3.5 flex items-center justify-between">Издания и цени <span class="text-gold">→</span></a>
+        <a href="#gift" class="mobile-nav-link py-3.5 flex items-center justify-between">За подарък <span class="text-gold">→</span></a>
+        <a href="#reviews" class="mobile-nav-link py-3.5 flex items-center justify-between">Истински отзиви <span class="text-gold">→</span></a>
+        <a href="#faq" class="mobile-nav-link py-3.5 flex items-center justify-between">Често задавани въпроси <span class="text-gold">→</span></a>
+      </nav>
+      <div class="mt-5">
+        <a href="#create-book" class="mobile-nav-link btn-luxury w-full rounded-full py-3.5 px-6 text-center text-sm font-medium flex items-center justify-center gap-2">
+          <span>Създай безплатен преглед</span>
+          <span class="text-gold-light">✦</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================================================== -->
+    <!-- HERO SECTION: Celestial Editorial Luxury + Step 1 CTA -->
+    <!-- ===================================================== -->
+    <section class="relative overflow-hidden paper-texture pt-8 pb-16 sm:pt-12 sm:pb-24 lg:pt-16 lg:pb-28">
+      <!-- Subtle Celestial Architectural Linework Background -->
+      <svg class="pointer-events-none absolute -top-24 -right-24 w-[520px] h-[520px] text-gold/15 hidden md:block" viewBox="0 0 400 400" fill="none">
+        <circle cx="200" cy="200" r="185" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 5" />
+        <circle cx="200" cy="200" r="142" stroke="currentColor" stroke-width="0.6" />
+        <circle cx="200" cy="200" r="96" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 6" />
+        <line x1="200" y1="8" x2="200" y2="392" stroke="currentColor" stroke-width="0.5" />
+        <line x1="8" y1="200" x2="392" y2="200" stroke="currentColor" stroke-width="0.5" />
+      </svg>
+
+      <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          <!-- Left Editorial Column -->
+          <div class="lg:col-span-6 order-2 lg:order-1">
+            <!-- Eyebrow -->
+            <div class="inline-flex items-center gap-2.5 text-xs sm:text-[13px] uppercase tracking-[0.2em] text-gold-dark font-medium mb-4 sm:mb-5">
+              <span>✦</span>
+              <span>Персонализирана астрологична книга</span>
+            </div>
+
+            <!-- Main Literata Editorial Heading -->
+            <h1 class="font-serif text-[34px] leading-[1.14] sm:text-[46px] lg:text-[54px] font-normal text-ink tracking-[-0.015em] mb-5">
+              Твоята рождена карта, превърната в <em class="italic text-gold-dark font-light">луксозна книга</em>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-[16px] sm:text-[18px] leading-[1.68] text-muted max-w-[540px] mb-6 sm:mb-8">
+              Над 200 страници задълбочен, изцяло личен астрологичен анализ, изготвен по точната ти дата, час и място на раждане. Издадена с твърди корици и топъл златен печат — незабравим подарък за теб или любим човек.
+            </p>
+
+            <!-- Hero Step 1 Quick Start Card -->
+            <form id="hero-step1-form" class="bg-white/90 border border-parchment rounded-2xl p-4 sm:p-5 shadow-[0_14px_36px_rgba(23,29,43,0.06)] max-w-[540px]">
+              <div class="flex items-center justify-between mb-2.5">
+                <label for="hero-name-input" class="text-xs uppercase tracking-[0.16em] font-semibold text-ink/75">
+                  Стъпка 1 от 4 — Въведи име за корицата
+                </label>
+                <span class="text-xs text-gold-dark font-medium">Безплатен преглед</span>
+              </div>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <input
+                  id="hero-name-input"
+                  type="text"
+                  placeholder="напр. Елена или Мария"
+                  class="editorial-input flex-1 rounded-xl px-4 text-[16px] placeholder:text-muted/60"
+                  autocomplete="given-name"
+                />
+                <button type="submit" class="btn-luxury rounded-xl px-6 py-3 text-[15px] font-medium whitespace-nowrap inline-flex items-center justify-center gap-2">
+                  <span>Създай своята книга</span>
+                  <svg class="w-4 h-4 text-gold-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              </div>
+              <p class="text-[12.5px] text-muted mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1">
+                <span>✓ Отнема по-малко от 1 минута</span>
+                <span>✓ Виждаш лични страници преди поръчка</span>
+              </p>
+            </form>
+
+            <!-- Social Proof Rating Row -->
+            <div class="mt-7 flex flex-wrap items-center gap-4">
+              <div class="flex -space-x-2.5">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=96&q=80" alt="Читател на Astromia" class="w-9 h-9 rounded-full object-cover ring-2 ring-ivory" />
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=96&q=80" alt="Читател на Astromia" class="w-9 h-9 rounded-full object-cover ring-2 ring-ivory" />
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=96&q=80" alt="Читател на Astromia" class="w-9 h-9 rounded-full object-cover ring-2 ring-ivory" />
+                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=96&q=80" alt="Читател на Astromia" class="w-9 h-9 rounded-full object-cover ring-2 ring-ivory" />
+              </div>
+              <div>
+                <div class="flex items-center gap-1 text-gold text-sm">
+                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                  <span class="text-ink font-semibold ml-1.5">4.9 / 5</span>
+                </div>
+                <p class="text-xs sm:text-[13px] text-muted">Над <strong class="text-ink font-medium">4 800</strong> създадени книги в България и Европа</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Editorial Visual Composition: Hardcover Book + Open Spread + Lifestyle Photo -->
+          <div class="lg:col-span-6 order-1 lg:order-2 relative">
+            <div class="relative mx-auto max-w-[540px] lg:max-w-none">
+              <!-- Editorial Backdrop Arch Card -->
+              <div class="relative rounded-[28px] bg-ivory-deep border border-parchment p-5 sm:p-8 lg:p-10 overflow-hidden shadow-[0_24px_60px_rgba(23,29,43,0.08)]">
+                <!-- Soft Editorial Ambient Photo Layer -->
+                <img
+                  src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1000&q=80"
+                  alt="Луксозно книжно издание в мека дневна светлина"
+                  class="absolute inset-0 w-full h-full object-cover opacity-[0.14] mix-blend-multiply pointer-events-none"
+                />
+
+                <!-- Delicate corner gold ornaments -->
+                <div class="absolute top-4 left-4 w-7 h-7 border-t border-l border-gold/45 pointer-events-none"></div>
+                <div class="absolute bottom-4 right-4 w-7 h-7 border-b border-r border-gold/45 pointer-events-none"></div>
+
+                <!-- Main Composition -->
+                <div class="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 py-2">
+                  <!-- Tactile 3D Hardcover Book (Live synced with user name!) -->
+                  <div class="book-stage shrink-0">
+                    <div id="hero-book-cover" class="book-3d cover-midnight w-[228px] sm:w-[258px] h-[328px] sm:h-[370px] rounded-r-xl rounded-l-[4px] p-5 sm:p-6 flex flex-col justify-between relative">
+                      <div class="book-spine-crease"></div>
+                      <div class="book-pages-edge"></div>
+
+                      <!-- Gold Foil Double Border Frame -->
+                      <div class="absolute inset-3.5 border border-gold/40 rounded-r-md pointer-events-none"></div>
+                      <div class="absolute inset-[18px] border border-gold/20 rounded-r-sm pointer-events-none"></div>
+
+                      <!-- Top Foil Header -->
+                      <div class="relative z-10 text-center pt-1">
+                        <p class="text-[9px] uppercase tracking-[0.28em] text-gold-light/85">Натална книга</p>
+                      </div>
+
+                      <!-- Center Delicate Gold Natal Wheel SVG -->
+                      <div class="relative z-10 flex flex-col items-center justify-center my-auto">
+                        <svg class="w-[126px] h-[126px] sm:w-[146px] sm:h-[146px] text-gold-light" viewBox="0 0 200 200" fill="none">
+                          <circle cx="100" cy="100" r="88" stroke="currentColor" stroke-width="0.9" opacity="0.8" />
+                          <circle cx="100" cy="100" r="72" stroke="currentColor" stroke-width="0.7" opacity="0.65" />
+                          <circle cx="100" cy="100" r="46" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.7" />
+                          <circle cx="100" cy="100" r="18" stroke="currentColor" stroke-width="0.7" opacity="0.8" />
+                          <!-- Zodiac Spokes -->
+                          <g stroke="currentColor" stroke-width="0.5" opacity="0.45">
+                            <line x1="100" y1="12" x2="100" y2="188" />
+                            <line x1="12" y1="100" x2="188" y2="100" />
+                            <line x1="38" y1="38" x2="162" y2="162" />
+                            <line x1="162" y1="38" x2="38" y2="162" />
+                            <line x1="56" y1="24" x2="144" y2="176" />
+                            <line x1="144" y1="24" x2="56" y2="176" />
+                          </g>
+                          <!-- Geometric Aspects -->
+                          <polygon points="100,28 164,132 36,132" stroke="currentColor" stroke-width="0.8" fill="none" opacity="0.85" />
+                          <polygon points="100,172 158,72 42,72" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.5" />
+                          <!-- Center Star -->
+                          <path d="M100 88 L103 97 L112 100 L103 103 L100 112 L97 103 L88 100 L97 97 Z" fill="currentColor" />
+                          <!-- Planetary dots -->
+                          <circle cx="100" cy="28" r="3" fill="currentColor" />
+                          <circle cx="164" cy="132" r="2.5" fill="currentColor" />
+                          <circle cx="36" cy="132" r="2.5" fill="currentColor" />
+                          <circle cx="148" cy="64" r="2" fill="currentColor" />
+                        </svg>
+
+                        <h2 id="hero-book-name" class="font-serif text-[23px] sm:text-[26px] tracking-wide foil-gold mt-3 text-center leading-tight">
+                          Елена
+                        </h2>
+                        <p id="hero-book-subtitle" class="text-[10px] uppercase tracking-[0.22em] text-gold-light/75 mt-1">
+                          14 Май • Телец
+                        </p>
+                      </div>
+
+                      <!-- Bottom Brand Mark -->
+                      <div class="relative z-10 text-center pb-1">
+                        <span class="font-serif text-[11px] tracking-[0.3em] uppercase text-gold-light/75">ASTROMIA</span>
+                      </div>
+
+                      <!-- Dusty Rose Silk Ribbon Bookmark -->
+                      <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 w-3.5 h-8 bg-rose shadow-md" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);"></div>
+                    </div>
+                  </div>
+
+                  <!-- Editorial Floating Open Page Card -->
+                  <div class="w-full sm:w-[200px] space-y-3.5">
+                    <div class="bg-ivory/95 backdrop-blur-sm border border-gold/30 rounded-xl p-4 shadow-lg">
+                      <p class="text-[10px] uppercase tracking-[0.2em] text-gold-dark mb-1.5">Глава II • Откъс</p>
+                      <p class="font-serif text-[13px] leading-relaxed text-ink/90 italic">
+                        „Луната в Риби дарява <span id="hero-excerpt-name">Елена</span> с дълбока интуиция, нежно сърце и естествен усет към красотата...“
+                      </p>
+                      <div class="mt-3 pt-2.5 border-t border-parchment flex items-center justify-between text-[11px] text-muted">
+                        <span>Стр. 42</span>
+                        <span class="text-gold-dark font-medium">214 стр. общо</span>
+                      </div>
+                    </div>
+
+                    <div class="bg-ink text-ivory rounded-xl p-4 shadow-lg border border-gold/25">
+                      <div class="flex items-center justify-between text-xs text-gold-light mb-1">
+                        <span>Луксозни твърди корици</span>
+                        <span>✦</span>
+                      </div>
+                      <div class="flex items-baseline gap-2">
+                        <span class="font-serif text-2xl">79 лв.</span>
+                        <span class="text-xs text-ivory/60 line-through">99 лв.</span>
+                      </div>
+                      <p class="text-[11px] text-ivory/75 mt-1">Включен безплатен преглед и лично посвещение</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Editorial Trust Strip -->
+    <section class="border-y border-parchment bg-ivory-deep/70">
+      <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 py-5 sm:py-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 text-center sm:text-left">
+          <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
+            <span class="w-9 h-9 rounded-full bg-ivory border border-gold/35 flex items-center justify-center text-gold-dark shrink-0">✦</span>
+            <div>
+              <p class="text-sm font-semibold text-ink">200+ лични страници</p>
+              <p class="text-xs text-muted">Изцяло по твоята карта</p>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
+            <span class="w-9 h-9 rounded-full bg-ivory border border-gold/35 flex items-center justify-center text-gold-dark shrink-0">◈</span>
+            <div>
+              <p class="text-sm font-semibold text-ink">Топъл златен печат</p>
+              <p class="text-xs text-muted">Кадифени твърди корици</p>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
+            <span class="w-9 h-9 rounded-full bg-ivory border border-gold/35 flex items-center justify-center text-gold-dark shrink-0">☽</span>
+            <div>
+              <p class="text-sm font-semibold text-ink">Швейцарски ефемериди</p>
+              <p class="text-xs text-muted">Прецизни астрологични данни</p>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
+            <span class="w-9 h-9 rounded-full bg-ivory border border-gold/35 flex items-center justify-center text-gold-dark shrink-0">✧</span>
+            <div>
+              <p class="text-sm font-semibold text-ink">Готова за подарък</p>
+              <p class="text-xs text-muted">Опция за луксозна кутия</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- INTERACTIVE 4-STEP PERSONALIZATION + FREE PREVIEW     -->
+    <!-- ===================================================== -->
+    <section id="create-book" class="py-16 sm:py-24 lg:py-28 bg-ivory relative">
+      <div class="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="max-w-[680px] mx-auto text-center mb-10 sm:mb-14">
+          <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-3">Интерактивно ателие Astromia</p>
+          <h2 class="font-serif text-[30px] sm:text-[40px] leading-[1.18] text-ink mb-3.5">
+            Създай своята книга в 4 лесни стъпки
+          </h2>
+          <p class="text-[15.5px] sm:text-[17px] text-muted leading-relaxed">
+            Въведи рождените данни, за да изчислим наталната карта и да ти покажем <strong class="text-ink font-medium">безплатен персонализиран преглед</strong> на корицата и първите страници.
+          </p>
+        </div>
+
+        <!-- Builder Card -->
+        <div class="bg-white border border-parchment rounded-[26px] shadow-[0_24px_64px_rgba(23,29,43,0.07)] overflow-hidden">
+          <div class="grid grid-cols-1 lg:grid-cols-12">
+
+            <!-- Left Column: Live Book & Cover Customizer -->
+            <div class="lg:col-span-5 bg-ivory-deep/85 p-6 sm:p-9 lg:p-10 flex flex-col items-center justify-between border-b lg:border-b-0 lg:border-r border-parchment">
+              <div class="w-full flex items-center justify-between text-xs uppercase tracking-[0.18em] text-muted mb-5">
+                <span>Преглед на корицата</span>
+                <span id="builder-zodiac-badge" class="px-2.5 py-1 rounded-full bg-ivory border border-gold/30 text-gold-dark font-medium">Телец ♉</span>
+              </div>
+
+              <!-- Live 3D Book Mockup -->
+              <div class="book-stage my-3">
+                <div id="builder-book-cover" class="book-3d cover-midnight w-[212px] sm:w-[238px] h-[304px] sm:h-[342px] rounded-r-xl rounded-l-[4px] p-5 flex flex-col justify-between relative transition-colors duration-500">
+                  <div class="book-spine-crease"></div>
+                  <div class="book-pages-edge"></div>
+                  <div class="absolute inset-3 border border-current opacity-30 rounded-r-md pointer-events-none"></div>
+
+                  <div class="text-center pt-1 relative z-10">
+                    <p class="text-[8.5px] uppercase tracking-[0.26em] opacity-80">Персонализирана натална книга</p>
+                  </div>
+
+                  <div class="flex flex-col items-center justify-center my-auto relative z-10">
+                    <!-- Dynamic Live Mini Wheel -->
+                    <svg class="w-[112px] h-[112px] sm:w-[128px] sm:h-[128px]" viewBox="0 0 200 200" fill="none">
+                      <circle cx="100" cy="100" r="86" stroke="currentColor" stroke-width="1" opacity="0.8" />
+                      <circle cx="100" cy="100" r="68" stroke="currentColor" stroke-width="0.7" opacity="0.55" />
+                      <circle cx="100" cy="100" r="42" stroke="currentColor" stroke-width="0.6" stroke-dasharray="2 3" opacity="0.65" />
+                      <polygon points="100,26 162,134 38,134" stroke="currentColor" stroke-width="0.85" fill="none" opacity="0.8" />
+                      <polygon points="100,174 156,74 44,74" stroke="currentColor" stroke-width="0.6" fill="none" opacity="0.45" />
+                      <path d="M100 88 L103 97 L112 100 L103 103 L100 112 L97 103 L88 100 L97 97 Z" fill="currentColor" />
+                    </svg>
+
+                    <h3 id="builder-book-name" class="font-serif text-[22px] sm:text-[25px] mt-3 text-center leading-tight tracking-wide">
+                      Елена
+                    </h3>
+                    <p id="builder-book-meta" class="text-[9.5px] uppercase tracking-[0.2em] opacity-80 mt-1 text-center">
+                      14.05.1993 • София
+                    </p>
+                  </div>
+
+                  <div class="text-center pb-1 relative z-10">
+                    <span class="font-serif text-[10px] tracking-[0.28em] uppercase opacity-75">ASTROMIA</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cover Color Selector -->
+              <div class="w-full mt-6 pt-5 border-t border-parchment">
+                <p class="text-xs uppercase tracking-[0.16em] text-muted text-center mb-3">Избери цвят на корицата</p>
+                <div class="flex items-center justify-center gap-3">
+                  <button type="button" onclick="setCoverTheme('midnight')" data-theme-btn="midnight" class="cover-swatch touch-target px-3.5 py-2 rounded-full border-2 border-gold bg-white text-xs font-medium flex items-center gap-2 transition-all">
+                    <span class="w-4 h-4 rounded-full bg-ink border border-gold/40"></span>
+                    <span>Нощно небе</span>
+                  </button>
+                  <button type="button" onclick="setCoverTheme('ivory')" data-theme-btn="ivory" class="cover-swatch touch-target px-3.5 py-2 rounded-full border border-parchment bg-white text-xs font-medium flex items-center gap-2 transition-all">
+                    <span class="w-4 h-4 rounded-full bg-[#EFE5D4] border border-gold/40"></span>
+                    <span>Слонова кост</span>
+                  </button>
+                  <button type="button" onclick="setCoverTheme('rose')" data-theme-btn="rose" class="cover-swatch touch-target px-3.5 py-2 rounded-full border border-parchment bg-white text-xs font-medium flex items-center gap-2 transition-all">
+                    <span class="w-4 h-4 rounded-full bg-rose border border-gold/40"></span>
+                    <span>Прашна роза</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Exact 4-Step Form (Name / Date / Time / Place) -->
+            <div class="lg:col-span-7 p-6 sm:p-9 lg:p-11 flex flex-col justify-between">
+              <div>
+                <!-- Progress Stepper -->
+                <div class="mb-7">
+                  <div class="flex items-center justify-between text-xs font-medium text-muted mb-2.5">
+                    <span id="step-label-text" class="text-ink font-semibold">Стъпка 1 от 4: Име на получателя</span>
+                    <span id="step-percent-text" class="text-gold-dark">25%</span>
+                  </div>
+                  <div class="w-full h-1.5 bg-ivory-deep rounded-full overflow-hidden">
+                    <div id="step-progress-bar" class="h-full bg-gold rounded-full transition-all duration-400" style="width: 25%"></div>
+                  </div>
+                  <!-- Step Pills -->
+                  <div class="grid grid-cols-4 gap-2 mt-4">
+                    <button type="button" onclick="goToStep(1)" data-step-tab="1" class="step-tab py-2 text-xs rounded-lg border border-gold bg-ivory text-ink font-semibold transition-all">1. Име</button>
+                    <button type="button" onclick="goToStep(2)" data-step-tab="2" class="step-tab py-2 text-xs rounded-lg border border-parchment text-muted transition-all">2. Дата</button>
+                    <button type="button" onclick="goToStep(3)" data-step-tab="3" class="step-tab py-2 text-xs rounded-lg border border-parchment text-muted transition-all">3. Час</button>
+                    <button type="button" onclick="goToStep(4)" data-step-tab="4" class="step-tab py-2 text-xs rounded-lg border border-parchment text-muted transition-all">4. Място</button>
+                  </div>
+                </div>
+
+                <!-- Form Steps Container -->
+                <form id="astromia-4step-form" onsubmit="event.preventDefault(); generatePreview();">
+
+                  <!-- STEP 1: NAME -->
+                  <div id="form-step-1" class="step-panel space-y-5 animate-fade-up">
+                    <div>
+                      <h3 class="font-serif text-2xl text-ink mb-1.5">За кого създаваме тази книга?</h3>
+                      <p class="text-sm text-muted">Името ще бъде изписано със златен печат на корицата и вплетено в целия текст на книгата.</p>
+                    </div>
+                    <div>
+                      <label for="input-name" class="block text-sm font-medium text-ink mb-2">Име (на кирилица или латиница) *</label>
+                      <input
+                        id="input-name"
+                        type="text"
+                        value="Елена"
+                        placeholder="напр. Елена, Мария, Виктория"
+                        class="editorial-input w-full rounded-xl px-4 text-base"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-ink mb-2">Обръщение в текста</label>
+                      <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer">
+                          <input type="radio" name="gender" value="female" checked class="peer sr-only" />
+                          <div class="touch-target rounded-xl border border-parchment peer-checked:border-gold peer-checked:bg-ivory flex items-center justify-center text-sm font-medium text-ink transition-all">
+                            Женски род (Тя)
+                          </div>
+                        </label>
+                        <label class="cursor-pointer">
+                          <input type="radio" name="gender" value="male" class="peer sr-only" />
+                          <div class="touch-target rounded-xl border border-parchment peer-checked:border-gold peer-checked:bg-ivory flex items-center justify-center text-sm font-medium text-ink transition-all">
+                            Мъжки род (Той)
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- STEP 2: BIRTH DATE -->
+                  <div id="form-step-2" class="step-panel hidden space-y-5 animate-fade-up">
+                    <div>
+                      <h3 class="font-serif text-2xl text-ink mb-1.5">Кога е рождената дата?</h3>
+                      <p class="text-sm text-muted">По датата изчисляваме позицията на Слънцето, Луната и всички планети в момента на раждане.</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3">
+                      <div>
+                        <label for="input-day" class="block text-sm font-medium text-ink mb-2">Ден *</label>
+                        <select id="input-day" class="editorial-input w-full rounded-xl px-3 text-base"></select>
+                      </div>
+                      <div>
+                        <label for="input-month" class="block text-sm font-medium text-ink mb-2">Месец *</label>
+                        <select id="input-month" class="editorial-input w-full rounded-xl px-3 text-base">
+                          <option value="1">Януари</option>
+                          <option value="2">Февруари</option>
+                          <option value="3">Март</option>
+                          <option value="4">Април</option>
+                          <option value="5" selected>Май</option>
+                          <option value="6">Юни</option>
+                          <option value="7">Юли</option>
+                          <option value="8">Август</option>
+                          <option value="9">Септември</option>
+                          <option value="10">Октомври</option>
+                          <option value="11">Ноември</option>
+                          <option value="12">Декември</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label for="input-year" class="block text-sm font-medium text-ink mb-2">Година *</label>
+                        <select id="input-year" class="editorial-input w-full rounded-xl px-3 text-base"></select>
+                      </div>
+                    </div>
+                    <div class="p-3.5 rounded-xl bg-ivory border border-parchment text-xs sm:text-[13px] text-muted flex items-center gap-2.5">
+                      <span class="text-gold-dark text-base">✦</span>
+                      <span>Зодиакален знак: <strong id="computed-sign-inline" class="text-ink">Телец</strong> — елемент <strong id="computed-element-inline" class="text-ink">Земя</strong></span>
+                    </div>
+                  </div>
+
+                  <!-- STEP 3: BIRTH TIME -->
+                  <div id="form-step-3" class="step-panel hidden space-y-5 animate-fade-up">
+                    <div>
+                      <h3 class="font-serif text-2xl text-ink mb-1.5">Какъв е часът на раждане?</h3>
+                      <p class="text-sm text-muted">Часът определя Асцендента и разпределението на домовете. Ако не го знаеш, ще изготвим соларна карта.</p>
+                    </div>
+                    <div id="time-inputs-wrapper" class="grid grid-cols-2 gap-3">
+                      <div>
+                        <label for="input-hour" class="block text-sm font-medium text-ink mb-2">Час (00–23)</label>
+                        <select id="input-hour" class="editorial-input w-full rounded-xl px-3.5 text-base"></select>
+                      </div>
+                      <div>
+                        <label for="input-minute" class="block text-sm font-medium text-ink mb-2">Минути (00–59)</label>
+                        <select id="input-minute" class="editorial-input w-full rounded-xl px-3.5 text-base"></select>
+                      </div>
+                    </div>
+                    <label class="flex items-center gap-3 cursor-pointer p-3.5 rounded-xl border border-parchment hover:border-gold/60 transition-colors">
+                      <input id="input-unknown-time" type="checkbox" class="w-5 h-5 accent-[#B9975B] rounded" />
+                      <span class="text-sm text-ink">Не знам точния час на раждане <span class="text-muted">(книгата остава напълно пълна и точна)</span></span>
+                    </label>
+                  </div>
+
+                  <!-- STEP 4: BIRTH PLACE -->
+                  <div id="form-step-4" class="step-panel hidden space-y-5 animate-fade-up">
+                    <div>
+                      <h3 class="font-serif text-2xl text-ink mb-1.5">Къде е рожденото място?</h3>
+                      <p class="text-sm text-muted">Географските координати завършват изчислението на точната натална карта.</p>
+                    </div>
+                    <div>
+                      <label for="input-place" class="block text-sm font-medium text-ink mb-2">Град и държава *</label>
+                      <input
+                        id="input-place"
+                        type="text"
+                        list="bg-cities"
+                        value="София, България"
+                        placeholder="напр. Пловдив, България"
+                        class="editorial-input w-full rounded-xl px-4 text-base"
+                        required
+                      />
+                      <datalist id="bg-cities">
+                        <option value="София, България"></option>
+                        <option value="Пловдив, България"></option>
+                        <option value="Варна, България"></option>
+                        <option value="Бургас, България"></option>
+                        <option value="Русе, България"></option>
+                        <option value="Стара Загора, България"></option>
+                        <option value="Плевен, България"></option>
+                        <option value="Велико Търново, България"></option>
+                        <option value="Благоевград, България"></option>
+                        <option value="Лондон, Великобритания"></option>
+                        <option value="Виена, Австрия"></option>
+                        <option value="Мюнхен, Германия"></option>
+                      </datalist>
+                    </div>
+                    <!-- Quick City Pills -->
+                    <div class="flex flex-wrap gap-2">
+                      <button type="button" onclick="setCity('София, България')" class="px-3 py-1.5 rounded-full bg-ivory border border-parchment text-xs text-ink hover:border-gold transition-colors">София</button>
+                      <button type="button" onclick="setCity('Пловдив, България')" class="px-3 py-1.5 rounded-full bg-ivory border border-parchment text-xs text-ink hover:border-gold transition-colors">Пловдив</button>
+                      <button type="button" onclick="setCity('Варна, България')" class="px-3 py-1.5 rounded-full bg-ivory border border-parchment text-xs text-ink hover:border-gold transition-colors">Варна</button>
+                      <button type="button" onclick="setCity('Бургас, България')" class="px-3 py-1.5 rounded-full bg-ivory border border-parchment text-xs text-ink hover:border-gold transition-colors">Бургас</button>
+                      <button type="button" onclick="setCity('Стара Загора, България')" class="px-3 py-1.5 rounded-full bg-ivory border border-parchment text-xs text-ink hover:border-gold transition-colors">Стара Загора</button>
+                    </div>
+                  </div>
+
+                  <!-- Step Navigation Buttons -->
+                  <div class="mt-8 pt-6 border-t border-parchment flex items-center justify-between gap-3">
+                    <button
+                      type="button"
+                      id="btn-prev-step"
+                      onclick="prevStep()"
+                      class="hidden touch-target px-5 rounded-xl border border-parchment text-sm font-medium text-ink hover:border-ink/40 transition-colors"
+                    >
+                      ← Назад
+                    </button>
+                    <div class="flex-1 flex justify-end">
+                      <button
+                        type="button"
+                        id="btn-next-step"
+                        onclick="nextStep()"
+                        class="btn-luxury w-full sm:w-auto px-8 rounded-xl text-[15px] font-medium inline-flex items-center justify-center gap-2"
+                      >
+                        <span>Продължи</span>
+                        <span>→</span>
+                      </button>
+                      <button
+                        type="submit"
+                        id="btn-generate-preview"
+                        class="hidden btn-gold w-full sm:w-auto px-8 rounded-xl text-[15px] font-medium inline-flex items-center justify-center gap-2"
+                      >
+                        <span>Виж безплатен преглед</span>
+                        <span>✦</span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Reassurance Note -->
+              <p class="mt-6 text-xs text-muted flex items-center gap-2">
+                <svg class="w-4 h-4 text-gold-dark shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                <span>Данните ти се използват единствено за изчисление на наталната карта.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===================================================== -->
+        <!-- GENERATED FREE PERSONALIZED PREVIEW (Revealed on Step 4) -->
+        <!-- ===================================================== -->
+        <div id="personalized-preview-panel" class="hidden mt-10 sm:mt-14 animate-fade-up">
+          <div class="bg-ivory-deep border border-gold/40 rounded-[26px] p-5 sm:p-9 lg:p-12 shadow-[0_24px_60px_rgba(23,29,43,0.09)]">
+            <!-- Preview Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-parchment mb-8">
+              <div>
+                <span class="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.2em] text-gold-dark font-semibold mb-2">
+                  <span>✦</span> Твоят безплатен преглед е готов
+                </span>
+                <h3 class="font-serif text-[26px] sm:text-[34px] text-ink leading-tight">
+                  Наталната книга на <span id="preview-heading-name" class="italic text-gold-dark">Елена</span>
+                </h3>
+                <p id="preview-meta-summary" class="text-sm text-muted mt-1">
+                  14 Май 1993 • 09:30 ч. • София, България
+                </p>
+              </div>
+              <button type="button" onclick="goToStep(1); document.getElementById('create-book').scrollIntoView({behavior:'smooth'});" class="text-sm text-gold-dark underline underline-offset-4 hover:text-ink self-start md:self-auto">
+                Промени рождените данни
+              </button>
+            </div>
+
+            <!-- Big Three Astrology Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+              <div class="bg-ivory rounded-2xl p-5 border border-parchment">
+                <p class="text-[11px] uppercase tracking-[0.18em] text-gold-dark font-semibold">Слънце (Същност)</p>
+                <p id="preview-sun-sign" class="font-serif text-xl text-ink mt-1">Телец ♉</p>
+                <p id="preview-sun-desc" class="text-xs text-muted mt-1.5 leading-relaxed">Топлина, стабилност, естетически усет и дълбока вярност към близките.</p>
+              </div>
+              <div class="bg-ivory rounded-2xl p-5 border border-parchment">
+                <p class="text-[11px] uppercase tracking-[0.18em] text-gold-dark font-semibold">Луна (Емоции)</p>
+                <p id="preview-moon-sign" class="font-serif text-xl text-ink mt-1">Риби ♓</p>
+                <p id="preview-moon-desc" class="text-xs text-muted mt-1.5 leading-relaxed">Богат вътрешен свят, емпатия и силна интуиция при вземане на решения.</p>
+              </div>
+              <div class="bg-ivory rounded-2xl p-5 border border-parchment">
+                <p class="text-[11px] uppercase tracking-[0.18em] text-gold-dark font-semibold">Асцендент (Излъчване)</p>
+                <p id="preview-asc-sign" class="font-serif text-xl text-ink mt-1">Везни ♎</p>
+                <p id="preview-asc-desc" class="text-xs text-muted mt-1.5 leading-relaxed">Естествена грация, хармонично присъствие и притегателен чар.</p>
+              </div>
+            </div>
+
+            <!-- Open Book Personalized Spread Preview -->
+            <div class="open-spread rounded-2xl p-5 sm:p-8 lg:p-10 mb-8">
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Left Page: Dynamic Computed SVG Natal Chart -->
+                <div class="flex flex-col items-center text-center">
+                  <p class="text-[10px] uppercase tracking-[0.22em] text-gold-dark mb-3">Стр. 12 • Лична натална карта</p>
+                  <div id="dynamic-natal-chart-container" class="w-full max-w-[300px] aspect-square flex items-center justify-center">
+                    <!-- Populated via JS -->
+                  </div>
+                  <p id="preview-chart-caption" class="font-serif italic text-xs text-muted mt-3">
+                    Небесната конфигурация в момента на раждането на Елена
+                  </p>
+                </div>
+
+                <!-- Right Page: Personalized Bulgarian Text Excerpt -->
+                <div class="border-t lg:border-t-0 lg:border-l border-gold/25 pt-6 lg:pt-0 lg:pl-10">
+                  <p class="text-[10px] uppercase tracking-[0.22em] text-gold-dark mb-2">Глава I • Твоята звездна природа</p>
+                  <h4 id="preview-chapter-title" class="font-serif text-2xl text-ink mb-4">
+                    Слънце в Телец — силата на тихата увереност
+                  </h4>
+                  <div id="preview-chapter-body" class="space-y-3.5 text-[14.5px] leading-[1.78] text-ink/85 font-serif">
+                    <!-- Populated dynamically with user's name & sign -->
+                  </div>
+                  <div class="mt-5 pt-4 border-t border-parchment flex items-center justify-between text-xs text-muted">
+                    <span>Пълната книга съдържа 214 страници</span>
+                    <span class="text-gold-dark font-medium">6 подробни глави</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Seamless Order Selection Right Below Preview -->
+            <div class="bg-white rounded-2xl border border-parchment p-5 sm:p-7">
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                  <h4 class="font-serif text-xl sm:text-2xl text-ink">Избери издание за книгата на <span id="order-inline-name" class="text-gold-dark">Елена</span></h4>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button type="button" onclick="selectEdition('classic')" data-edition-card="classic" class="edition-option text-left p-3.5 rounded-xl border border-parchment hover:border-gold transition-all">
+                      <p class="text-xs font-semibold text-ink">Класическо</p>
+                      <p class="font-serif text-lg text-ink mt-0.5">79 лв.</p>
+                      <p class="text-[11px] text-muted mt-0.5">Твърди корици + златен печат</p>
+                    </button>
+                    <button type="button" onclick="selectEdition('gift')" data-edition-card="gift" class="edition-option text-left p-3.5 rounded-xl border-2 border-gold bg-ivory/70 relative transition-all">
+                      <span class="absolute -top-2.5 right-2.5 bg-gold text-white text-[9.5px] uppercase tracking-wider px-2 py-0.5 rounded-full font-semibold">Хит</span>
+                      <p class="text-xs font-semibold text-ink">Подаръчен сет</p>
+                      <p class="font-serif text-lg text-ink mt-0.5">99 лв.</p>
+                      <p class="text-[11px] text-muted mt-0.5">Книга + луксозна кутия + панделка</p>
+                    </button>
+                    <button type="button" onclick="selectEdition('bundle')" data-edition-card="bundle" class="edition-option text-left p-3.5 rounded-xl border border-parchment hover:border-gold transition-all">
+                      <p class="text-xs font-semibold text-ink">Книга + PDF</p>
+                      <p class="font-serif text-lg text-ink mt-0.5">89 лв.</p>
+                      <p class="text-[11px] text-muted mt-0.5">Твърди корици + дигитално копие</p>
+                    </button>
+                  </div>
+
+                  <!-- Free Personal Dedication Input -->
+                  <div>
+                    <label for="input-dedication" class="block text-xs uppercase tracking-[0.14em] text-muted font-medium mb-1.5">
+                      Безплатно лично посвещение на първата страница (по желание)
+                    </label>
+                    <input
+                      id="input-dedication"
+                      type="text"
+                      maxlength="160"
+                      placeholder="напр. Честит рожден ден! Нека звездите винаги осветяват пътя ти."
+                      class="editorial-input w-full rounded-xl px-4 text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div class="lg:col-span-5 lg:border-l lg:border-parchment lg:pl-6 flex flex-col justify-center">
+                  <div class="flex items-baseline justify-between mb-1">
+                    <span class="text-sm text-muted">Избрано издание:</span>
+                    <span id="selected-edition-price" class="font-serif text-2xl text-ink">99 лв.</span>
+                  </div>
+                  <p id="selected-edition-label" class="text-xs text-gold-dark mb-4">Луксозен подаръчен комплект с кутия и златна панделка</p>
+                  <button type="button" onclick="openCheckoutDrawer()" class="btn-luxury w-full rounded-xl py-3.5 px-6 text-[15px] font-medium flex items-center justify-center gap-2">
+                    <span>Поръчай книгата сега</span>
+                    <span class="text-gold-light">→</span>
+                  </button>
+                  <p class="text-[11.5px] text-muted text-center mt-2.5">
+                    Плащане с наложен платеж при доставка или с карта
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- WHAT'S INSIDE: Editorial Open Spreads & 6 Chapters    -->
+    <!-- ===================================================== -->
+    <section id="whats-inside" class="py-16 sm:py-24 bg-ivory-deep/65 border-t border-parchment">
+      <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+
+          <!-- Left Sticky Editorial Visual + Interactive Spread Switcher -->
+          <div class="lg:col-span-6 lg:sticky lg:top-28">
+            <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-3">Какво съдържа книгата</p>
+            <h2 class="font-serif text-[30px] sm:text-[40px] leading-[1.16] text-ink mb-4">
+              Повече от хороскоп — <em class="italic font-light text-gold-dark">пътеводител към самата теб</em>
+            </h2>
+            <p class="text-[15.5px] text-muted leading-relaxed mb-7">
+              Всяка книга се създава индивидуално в над 200 страници на чист, елегантен български език — без клишета, с истинска астрологична дълбочина и естетични илюстрации.
+            </p>
+
+            <!-- Interactive Sample Spread Viewer -->
+            <div class="bg-ivory border border-parchment rounded-2xl p-4 sm:p-6 shadow-[0_18px_42px_rgba(23,29,43,0.07)]">
+              <!-- Spread Tabs -->
+              <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-4 border-b border-parchment">
+                <button type="button" onclick="showSpread(0)" data-spread-btn="0" class="spread-tab shrink-0 px-3.5 py-2 rounded-full text-xs font-medium bg-ink text-ivory transition-colors">Натална карта</button>
+                <button type="button" onclick="showSpread(1)" data-spread-btn="1" class="spread-tab shrink-0 px-3.5 py-2 rounded-full text-xs font-medium bg-white border border-parchment text-ink hover:border-gold transition-colors">Любов и връзки</button>
+                <button type="button" onclick="showSpread(2)" data-spread-btn="2" class="spread-tab shrink-0 px-3.5 py-2 rounded-full text-xs font-medium bg-white border border-parchment text-ink hover:border-gold transition-colors">Годишни транзити</button>
+              </div>
+
+              <!-- Visual Spread Content -->
+              <div id="spread-display" class="open-spread rounded-xl p-5 sm:p-7 min-h-[250px] flex flex-col justify-between transition-all">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+                  <div class="text-center">
+                    <img
+                      id="spread-image"
+                      src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=700&q=80"
+                      alt="Разтворена страница от астрологична книга Astromia"
+                      class="w-full h-[180px] sm:h-[205px] object-cover rounded-lg border border-gold/25"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div>
+                    <p id="spread-kicker" class="text-[10px] uppercase tracking-[0.2em] text-gold-dark mb-1.5">Глава I • Стр. 14</p>
+                    <h3 id="spread-title" class="font-serif text-lg sm:text-xl text-ink mb-2.5">Твоята лична небесна карта</h3>
+                    <p id="spread-text" class="font-serif text-[13.5px] leading-relaxed text-ink/80">
+                      Детайлно графично изображение на разположението на всички 10 планети, домове и ключови аспекти в точния миг на твоето раждане.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: 6 Editorial Chapters List -->
+          <div class="lg:col-span-6 space-y-4">
+            <article class="bg-ivory border border-parchment rounded-2xl p-5 sm:p-6 flex gap-4 sm:gap-5 items-start hover:border-gold/60 transition-colors">
+              <span class="font-serif text-2xl text-gold-dark/85 shrink-0 w-9">01</span>
+              <div>
+                <h3 class="font-serif text-lg sm:text-xl text-ink mb-1.5">Натална карта и планетарни аспекти</h3>
+                <p class="text-sm text-muted leading-relaxed">Точна графика на небето в часа на раждането ти, заедно с обяснение на най-силните хармонични и динамични аспекти между планетите.</p>
+              </div>
+            </article>
+
+            <article class="bg-ivory border border-parchment rounded-2xl p-5 sm:p-6 flex gap-4 sm:gap-5 items-start hover:border-gold/60 transition-colors">
+              <span class="font-serif text-2xl text-gold-dark/85 shrink-0 w-9">02</span>
+              <div>
+                <h3 class="font-serif text-lg sm:text-xl text-ink mb-1.5">Слънце, Луна и Асцендент</h3>
+                <p class="text-sm text-muted leading-relaxed">Дълбок портрет на твоята същност, емоционалния ти свят, начина, по който те възприемат околните, и вътрешните ти нужди.</p>
+              </div>
+            </article>
+
+            <article class="bg-ivory border border-parchment rounded-2xl p-5 sm:p-6 flex gap-4 sm:gap-5 items-start hover:border-gold/60 transition-colors">
+              <span class="font-serif text-2xl text-gold-dark/85 shrink-0 w-9">03</span>
+              <div>
+                <h3 class="font-serif text-lg sm:text-xl text-ink mb-1.5">Любов, Венера и взаимоотношения</h3>
+                <p class="text-sm text-muted leading-relaxed">Как обичаш, какво търсиш в партньора, кои знаци резонират най-силно с теб и как да изграждаш хармонични връзки.</p>
+              </div>
+            </article>
+
+            <article class="bg-ivory border border-parchment rounded-2xl p-5 sm:p-6 flex gap-4 sm:gap-5 items-start hover:border-gold/60 transition-colors">
+              <span class="font-serif text-2xl text-gold-dark/85 shrink-0 w-9">04</span>
+              <div>
+                <h3 class="font-serif text-lg sm:text-xl text-ink mb-1.5">Призвание, кариера и изобилие</h3>
+                <p class="text-sm text-muted leading-relaxed">Твоите природни таланти, професионални посоки и отношение към финансите според позицията на Медиум Цели, Юпитер и Сатурн.</p>
+              </div>
+            </article>
+
+            <article class="bg-ivory border border-parchment rounded-2xl p-5 sm:p-6 flex gap-4 sm:gap-5 items-start hover:border-gold/60 transition-colors">
+              <span class="font-serif text-2xl text-gold-dark/85 shrink-0 w-9">05</span>
+              <div>
+                <h3 class="font-serif text-lg sm:text-xl text-ink mb-1.5">Кармични уроци и лунни възли</h3>
+                <p class="text-sm text-muted leading-relaxed">Пътят на душата ти — какво носиш като дарба от миналото и накъде те води Северният лунен възел в този живот.</p>
+              </div>
+            </article>
+
+            <article class="bg-ivory border border-parchment rounded-2xl p-5 sm:p-6 flex gap-4 sm:gap-5 items-start hover:border-gold/60 transition-colors">
+              <span class="font-serif text-2xl text-gold-dark/85 shrink-0 w-9">06</span>
+              <div>
+                <h3 class="font-serif text-lg sm:text-xl text-ink mb-1.5">Лична прогноза за следващите 12 месеца</h3>
+                <p class="text-sm text-muted leading-relaxed">Ключови периоди за любов, нови начинания и лична трансформация, изчислени спрямо предстоящите планетарни транзити.</p>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- CRAFTSMANSHIP & MATERIALS: Asymmetric Editorial Grid  -->
+    <!-- ===================================================== -->
+    <section id="craftsmanship" class="py-16 sm:py-24 bg-ivory">
+      <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div class="max-w-[600px]">
+            <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-3">Колекционерско качество</p>
+            <h2 class="font-serif text-[30px] sm:text-[40px] leading-[1.16] text-ink">
+              Създадена да се пази <em class="italic font-light text-gold-dark">цял живот</em>
+            </h2>
+          </div>
+          <p class="text-[15px] text-muted max-w-[440px]">
+            Всяка книга Astromia се отпечатва индивидуално в бутикова печатница с внимание към хартията, подвързията и златния релеф.
+          </p>
+        </div>
+
+        <!-- Asymmetric Image-Led Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6">
+          <!-- Large Feature Card -->
+          <div class="md:col-span-7 relative rounded-2xl overflow-hidden group min-h-[340px] sm:min-h-[420px] border border-parchment">
+            <img
+              src="https://learningmole.com/wp-content/uploads/2024/02/Space-Books-1.jpg?auto=format&fit=crop&w=1100&q=80"
+              alt="Луксозни твърди корици и кремава хартия"
+              class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-ivory">
+              <span class="text-[11px] uppercase tracking-[0.2em] text-gold-light">Подвързия и детайли</span>
+              <h3 class="font-serif text-2xl sm:text-3xl mt-1.5 mb-2">Твърди корици с топъл златен печат</h3>
+              <p class="text-sm text-ivory/80 max-w-[460px]">Копринено-матово покритие, устойчиво на времето, с прецизно пресовано златно фолио и плетена книгоразделителна лента.</p>
+            </div>
+          </div>
+
+          <!-- Right Stacked Editorial Cards -->
+          <div class="md:col-span-5 flex flex-col gap-5 sm:gap-6">
+            <div class="relative rounded-2xl overflow-hidden flex-1 min-h-[200px] border border-parchment group">
+              <img
+                src="https://c02.purpledshub.com/uploads/sites/48/2020/03/Astronomy-books-e499b62.jpg?webp=1&w=1200?auto=format&fit=crop&w=900&q=80"
+                alt="Архивна кремава хартия 120 г/м²"
+                class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink/82 via-ink/20 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-ivory">
+                <h3 class="font-serif text-xl">120 г/м² кремава архивна хартия</h3>
+                <p class="text-xs sm:text-sm text-ivory/80 mt-1">Топъл слоновокостен нюанс, нежен за очите при вечерно четене.</p>
+              </div>
+            </div>
+
+            <div class="bg-ink text-ivory rounded-2xl p-6 sm:p-7 border border-gold/30 flex flex-col justify-between">
+              <div class="flex items-center justify-between text-gold-light text-xs uppercase tracking-[0.18em] mb-3">
+                <span>Технически спецификации</span>
+                <span>✦</span>
+              </div>
+              <dl class="grid grid-cols-2 gap-y-3 gap-x-4 text-sm">
+                <div>
+                  <dt class="text-ivory/60 text-xs">Формат</dt>
+                  <dd class="font-medium mt-0.5">16 × 23 см (A5+)</dd>
+                </div>
+                <div>
+                  <dt class="text-ivory/60 text-xs">Обем</dt>
+                  <dd class="font-medium mt-0.5">200–225 страници</dd>
+                </div>
+                <div>
+                  <dt class="text-ivory/60 text-xs">Език</dt>
+                  <dd class="font-medium mt-0.5">Български (редактиран)</dd>
+                </div>
+                <div>
+                  <dt class="text-ivory/60 text-xs">Изработка</dt>
+                  <dd class="font-medium mt-0.5">Индивидуален тираж (1 бр.)</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- PRODUCT EDITIONS & COMPARISON                         -->
+    <!-- ===================================================== -->
+    <section id="editions" class="py-16 sm:py-24 bg-ivory-deep/70 border-y border-parchment">
+      <div class="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-[640px] mx-auto text-center mb-12">
+          <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-3">Издания и цени</p>
+          <h2 class="font-serif text-[30px] sm:text-[40px] leading-[1.16] text-ink mb-3">
+            Избери своето издание на Astromia
+          </h2>
+          <p class="text-[15.5px] text-muted">
+            Всяко издание включва пълния персонализиран астрологичен анализ, натална карта и опция за безплатно посвещение.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          <!-- Classic Edition -->
+          <div class="bg-ivory border border-parchment rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="h-44 rounded-xl overflow-hidden mb-6 border border-parchment bg-ivory-deep">
+                <img
+                  src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=700&q=80"
+                  alt="Класическо издание с твърди корици"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <p class="text-xs uppercase tracking-[0.18em] text-muted font-medium">За лично четене</p>
+              <h3 class="font-serif text-2xl text-ink mt-1">Класическо издание</h3>
+              <div class="mt-3 flex items-baseline gap-2.5">
+                <span class="font-serif text-3xl text-ink">79 лв.</span>
+                <span class="text-sm text-muted line-through">99 лв.</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-ink/85">
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> 200+ персонализирани страници</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> Луксозни твърди корици със златен печат</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> Избор между 3 цвята на корицата</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> Безплатно лично посвещение</li>
+              </ul>
+            </div>
+            <button type="button" onclick="chooseEditionAndScroll('classic')" class="mt-8 touch-target w-full rounded-xl border border-ink text-ink hover:bg-ink hover:text-ivory text-sm font-medium transition-colors">
+              Избери Класическо
+            </button>
+          </div>
+
+          <!-- Luxury Gift Edition (Highlighted) -->
+          <div class="bg-ink text-ivory border-2 border-gold rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative shadow-[0_24px_54px_rgba(23,29,43,0.22)]">
+            <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gold text-white text-[11px] uppercase tracking-[0.18em] px-4 py-1 rounded-full font-semibold whitespace-nowrap">
+              Най-предпочитан избор
+            </span>
+            <div>
+              <div class="h-44 rounded-xl overflow-hidden mb-6 border border-gold/35">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqbnUN94SBX6W8EniOgX_bz7LxUpzFW_OVLJivFIdm23vxtb0koGmffmo&s=10?auto=format&fit=crop&w=700&q=80"
+                  alt="Луксозен подаръчен комплект Astromia"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <p class="text-xs uppercase tracking-[0.18em] text-gold-light font-medium">Готова за подаряване</p>
+              <h3 class="font-serif text-2xl text-ivory mt-1">Подаръчен комплект</h3>
+              <div class="mt-3 flex items-baseline gap-2.5">
+                <span class="font-serif text-3xl text-gold-light">99 лв.</span>
+                <span class="text-sm text-ivory/50 line-through">125 лв.</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-ivory/90">
+                <li class="flex items-start gap-2.5"><span class="text-gold-light">✦</span> Всичко от Класическото издание</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-light">✦</span> Бутикова подаръчна кутия със златно лого</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-light">✦</span> Сатенена панделка и тишу хартия</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-light">✦</span> Принтирана картичка с наталната карта</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-light">✦</span> Приоритетна изработка</li>
+              </ul>
+            </div>
+            <button type="button" onclick="chooseEditionAndScroll('gift')" class="mt-8 btn-gold w-full rounded-xl text-sm font-medium">
+              Избери Подаръчен комплект
+            </button>
+          </div>
+
+          <!-- Hardcover + PDF Bundle -->
+          <div class="bg-ivory border border-parchment rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="h-44 rounded-xl overflow-hidden mb-6 border border-parchment bg-ivory-deep">
+                <img
+                  src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=700&q=80"
+                  alt="Твърди корици плюс дигитално PDF издание"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <p class="text-xs uppercase tracking-[0.18em] text-muted font-medium">Винаги с теб</p>
+              <h3 class="font-serif text-2xl text-ink mt-1">Твърди корици + PDF</h3>
+              <div class="mt-3 flex items-baseline gap-2.5">
+                <span class="font-serif text-3xl text-ink">89 лв.</span>
+                <span class="text-sm text-muted line-through">115 лв.</span>
+              </div>
+              <ul class="mt-6 space-y-3 text-sm text-ink/85">
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> Всичко от Класическото издание</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> Моментално дигитално PDF копие по имейл</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> Удобно за четене на телефон и таблет</li>
+                <li class="flex items-start gap-2.5"><span class="text-gold-dark">✓</span> Безплатно лично посвещение</li>
+              </ul>
+            </div>
+            <button type="button" onclick="chooseEditionAndScroll('bundle')" class="mt-8 touch-target w-full rounded-xl border border-ink text-ink hover:bg-ink hover:text-ivory text-sm font-medium transition-colors">
+              Избери Книга + PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- FOR GIFTING: Emotional Editorial Section              -->
+    <!-- ===================================================== -->
+    <section id="gift" class="py-16 sm:py-24 bg-ivory">
+      <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div class="lg:col-span-6 relative">
+            <div class="rounded-[24px] overflow-hidden border border-parchment shadow-[0_20px_50px_rgba(23,29,43,0.09)]">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqbnUN94SBX6W8EniOgX_bz7LxUpzFW_OVLJivFIdm23vxtb0koGmffmo&s=10?auto=format&fit=crop&w=1000&q=80"
+                alt="Елегантна подаръчна опаковка с панделка"
+                class="w-full h-[360px] sm:h-[460px] object-cover"
+                loading="lazy"
+              />
+            </div>
+            <!-- Handwritten Dedication Preview Card -->
+            <div class="sm:absolute -bottom-6 right-6 mt-4 sm:mt-0 bg-ivory border border-gold/40 rounded-2xl p-5 max-w-[320px] shadow-xl">
+              <p class="text-[10px] uppercase tracking-[0.2em] text-gold-dark mb-1.5">Страница с посвещение</p>
+              <p class="font-serif italic text-[14px] leading-relaxed text-ink">
+                „За най-добрата ми приятелка — нека винаги помниш колко си специална. С обич, Деси.“
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 lg:pl-4">
+            <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-3">Подарък със смисъл</p>
+            <h2 class="font-serif text-[30px] sm:text-[40px] leading-[1.16] text-ink mb-5">
+              Подаръкът, който оставя <em class="italic font-light text-gold-dark">без думи</em>
+            </h2>
+            <p class="text-[16px] text-muted leading-relaxed mb-6">
+              Вместо поредния безличен предмет, подари книга, написана единствено за нея. С нейното име на корицата, нейните звезди вътре и твоето лично посвещение на първата страница.
+            </p>
+            <div class="grid grid-cols-2 gap-3.5 mb-8 text-sm">
+              <div class="p-3.5 rounded-xl bg-ivory-deep/80 border border-parchment">
+                <span class="text-gold-dark font-medium block mb-0.5">Рожден ден</span>
+                <span class="text-xs text-muted">Истински личен жест</span>
+              </div>
+              <div class="p-3.5 rounded-xl bg-ivory-deep/80 border border-parchment">
+                <span class="text-gold-dark font-medium block mb-0.5">Годишнина</span>
+                <span class="text-xs text-muted">За любимата жена</span>
+              </div>
+              <div class="p-3.5 rounded-xl bg-ivory-deep/80 border border-parchment">
+                <span class="text-gold-dark font-medium block mb-0.5">За приятелка или майка</span>
+                <span class="text-xs text-muted">Емоция, която се пази</span>
+              </div>
+              <div class="p-3.5 rounded-xl bg-ivory-deep/80 border border-parchment">
+                <span class="text-gold-dark font-medium block mb-0.5">Подарък за самата теб</span>
+                <span class="text-xs text-muted">Време за себепознание</span>
+              </div>
+            </div>
+            <a href="#create-book" class="btn-luxury px-7 py-3.5 rounded-full text-sm font-medium inline-flex items-center gap-2">
+              <span>Персонализирай подарък сега</span>
+              <span class="text-gold-light">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- HOW IT WORKS: 3 Clean Editorial Steps                 -->
+    <!-- ===================================================== -->
+    <section class="py-14 sm:py-20 bg-ivory-deep/60 border-y border-parchment">
+      <div class="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-[560px] mx-auto mb-11">
+          <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-2.5">Лесно и вдъхновяващо</p>
+          <h2 class="font-serif text-[28px] sm:text-[36px] text-ink">Как се ражда твоята книга</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div class="text-center px-4">
+            <div class="w-12 h-12 rounded-full bg-ivory border border-gold/50 text-gold-dark font-serif text-lg flex items-center justify-center mx-auto mb-4">1</div>
+            <h3 class="font-serif text-xl text-ink mb-2">Въвеждаш рождените данни</h3>
+            <p class="text-sm text-muted leading-relaxed">Име, дата, час и място на раждане — процесът отнема под 60 секунди.</p>
+          </div>
+          <div class="text-center px-4">
+            <div class="w-12 h-12 rounded-full bg-ivory border border-gold/50 text-gold-dark font-serif text-lg flex items-center justify-center mx-auto mb-4">2</div>
+            <h3 class="font-serif text-xl text-ink mb-2">Разглеждаш безплатен преглед</h3>
+            <p class="text-sm text-muted leading-relaxed">Виждаш корицата, наталната карта и лични откъси, избираш цвят и добавяш посвещение.</p>
+          </div>
+          <div class="text-center px-4">
+            <div class="w-12 h-12 rounded-full bg-ivory border border-gold/50 text-gold-dark font-serif text-lg flex items-center justify-center mx-auto mb-4">3</div>
+            <h3 class="font-serif text-xl text-ink mb-2">Получаваш луксозната книга</h3>
+            <p class="text-sm text-muted leading-relaxed">Отпечатваме и подвързваме твоя екземпляр и го доставяме с Еконт или Спиди за 3–5 работни дни.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- VERIFIED TESTIMONIALS & RATINGS                       -->
+    <!-- ===================================================== -->
+    <section id="reviews" class="py-16 sm:py-24 bg-ivory">
+      <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-3">Отзиви от читатели</p>
+            <h2 class="font-serif text-[30px] sm:text-[40px] leading-[1.16] text-ink">
+              Обичана от над <em class="italic font-light text-gold-dark">4 800 читатели</em>
+            </h2>
+          </div>
+          <div class="bg-ivory-deep border border-parchment rounded-2xl px-5 py-3.5 inline-flex items-center gap-4 self-start md:self-auto">
+            <div class="text-gold text-lg tracking-widest">★★★★★</div>
+            <div class="border-l border-parchment pl-4">
+              <p class="font-serif text-xl text-ink leading-none">4.9 / 5</p>
+              <p class="text-xs text-muted mt-1">Средна оценка</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Review 1 -->
+          <article class="bg-white border border-parchment rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(23,29,43,0.04)]">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-gold text-sm tracking-wider">★★★★★</span>
+                <span class="text-[11px] text-gold-dark bg-ivory px-2.5 py-0.5 rounded-full border border-parchment">Потвърдена поръчка</span>
+              </div>
+              <p class="font-serif text-[15px] leading-relaxed text-ink/90 mb-5">
+                „Поръчах книгата за 35-ия рожден ден на сестра ми в подаръчния комплект. Когато видя името си със златни букви на корицата и посвещението ми вътре, буквално се просълзи. Изработката е изключително луксозна!“
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-parchment/80">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80" alt="Мария К." class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+              <div>
+                <p class="text-sm font-semibold text-ink">Мария К.</p>
+                <p class="text-xs text-muted">София • Подаръчен комплект</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 2 -->
+          <article class="bg-white border border-parchment rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(23,29,43,0.04)]">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-gold text-sm tracking-wider">★★★★★</span>
+                <span class="text-[11px] text-gold-dark bg-ivory px-2.5 py-0.5 rounded-full border border-parchment">Потвърдена поръчка</span>
+              </div>
+              <p class="font-serif text-[15px] leading-relaxed text-ink/90 mb-5">
+                „Бях скептична дали текстът няма да е общ, но още на безплатния преглед се изненадах колко точно описва характера ми. Глава III за любовта и годишните транзити са написани невероятно красиво и задълбочено.“
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-parchment/80">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80" alt="Виктория С." class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+              <div>
+                <p class="text-sm font-semibold text-ink">Виктория С.</p>
+                <p class="text-xs text-muted">Пловдив • Корица Нощно небе</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Review 3 -->
+          <article class="bg-white border border-parchment rounded-2xl p-6 flex flex-col justify-between shadow-[0_10px_30px_rgba(23,29,43,0.04)]">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-gold text-sm tracking-wider">★★★★★</span>
+                <span class="text-[11px] text-gold-dark bg-ivory px-2.5 py-0.5 rounded-full border border-parchment">Потвърдена поръчка</span>
+              </div>
+              <p class="font-serif text-[15px] leading-relaxed text-ink/90 mb-5">
+                „Взех я за съпругата ми за годишнината ни. Пристигна за 4 дни, опакована като бижу. Хартията е плътна, кремава, а корицата в Прашна роза стои прекрасно на нощното ѝ шкафче. Най-добрият подарък, който съм избирал.“
+              </p>
+            </div>
+            <div class="flex items-center gap-3 pt-4 border-t border-parchment/80">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Георги Т." class="w-10 h-10 rounded-full object-cover" loading="lazy" />
+              <div>
+                <p class="text-sm font-semibold text-ink">Георги Т.</p>
+                <p class="text-xs text-muted">Варна • Корица Прашна роза</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- FAQ ACCORDION                                         -->
+    <!-- ===================================================== -->
+    <section id="faq" class="py-16 sm:py-24 bg-ivory-deep/65 border-t border-parchment">
+      <div class="max-w-[860px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-11">
+          <p class="text-xs uppercase tracking-[0.22em] text-gold-dark font-medium mb-2.5">Всичко, което искаш да знаеш</p>
+          <h2 class="font-serif text-[30px] sm:text-[38px] text-ink">Често задавани въпроси</h2>
+        </div>
+
+        <div class="space-y-3.5" id="faq-list">
+          <div class="faq-item bg-ivory border border-parchment rounded-2xl overflow-hidden" data-open="true">
+            <button type="button" onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-serif text-[17px] text-ink">
+              <span>Какво да направя, ако не знам точния час на раждане?</span>
+              <svg class="faq-chevron w-5 h-5 text-gold-dark shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-muted leading-relaxed">
+                  Никакъв проблем — в Стъпка 3 просто отбележи „Не знам точния час на раждане“. Ще изготвим пълната книга по соларната ти карта, която включва всички планети, аспекти, любов, кариера и годишни транзити.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-ivory border border-parchment rounded-2xl overflow-hidden" data-open="false">
+            <button type="button" onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-serif text-[17px] text-ink">
+              <span>Колко време отнема изработката и доставката?</span>
+              <svg class="faq-chevron w-5 h-5 text-gold-dark shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-muted leading-relaxed">
+                  Тъй като всяка книга се отпечатва и подвързва индивидуално за теб, изработката и доставката до офис на Еконт, Спиди или личен адрес отнемат между 3 и 5 работни дни.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-ivory border border-parchment rounded-2xl overflow-hidden" data-open="false">
+            <button type="button" onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-serif text-[17px] text-ink">
+              <span>Мога ли да добавя лично посвещение за подарък?</span>
+              <svg class="faq-chevron w-5 h-5 text-gold-dark shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-muted leading-relaxed">
+                  Да, напълно безплатно! Посвещението ти ще бъде отпечатано с елегантен калиграфски шрифт на специалната въвеждаща страница в началото на книгата.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-ivory border border-parchment rounded-2xl overflow-hidden" data-open="false">
+            <button type="button" onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-serif text-[17px] text-ink">
+              <span>Как мога да платя за поръчката си?</span>
+              <svg class="faq-chevron w-5 h-5 text-gold-dark shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="px-6 pb-5 text-sm sm:text-[15px] text-muted leading-relaxed">
+                  Предлагаме плащане с наложен платеж при получаване (в брой или с карта при куриера), както и сигурно онлайн плащане с дебитна/кредитна карта Visa, Mastercard или Apple Pay.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- FINAL EDITORIAL CTA BANNER                            -->
+    <!-- ===================================================== -->
+    <section class="py-16 sm:py-20 bg-ivory">
+      <div class="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="relative bg-ink text-ivory rounded-[28px] px-6 py-12 sm:px-14 sm:py-16 text-center overflow-hidden border border-gold/30">
+          <!-- Subtle Celestial Corner Lines -->
+          <div class="absolute inset-4 border border-gold/20 rounded-[20px] pointer-events-none"></div>
+          <p class="text-xs uppercase tracking-[0.24em] text-gold-light mb-3 relative z-10">✦ Написано в звездите ✦</p>
+          <h2 class="font-serif text-[28px] sm:text-[42px] leading-[1.18] max-w-[660px] mx-auto mb-4 relative z-10">
+            Открий своята звездна история още днес
+          </h2>
+          <p class="text-sm sm:text-base text-ivory/75 max-w-[520px] mx-auto mb-8 relative z-10">
+            Създай безплатен персонализиран преглед на твоята книга за по-малко от минута — без ангажимент за поръчка.
+          </p>
+          <a href="#create-book" class="btn-gold relative z-10 px-9 py-4 rounded-full text-[15px] font-medium inline-flex items-center gap-2">
+            <span>Създай своята книга</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================== -->
+  <!-- COMPLETE LUXURY DARK FOOTER (Supplied White Logo)     -->
+  <!-- ===================================================== -->
+  <footer class="bg-ink text-ivory/85 border-t border-gold/25 pt-14 pb-24 lg:pb-12">
+    <div class="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-ivory/10">
+
+        <!-- Brand Column -->
+        <div class="lg:col-span-4 space-y-4">
+          <img
+            src="https://i.postimg.cc/xdFgRPHH/logowhite-removebg-preview.png"
+            alt="Astromia"
+            class="h-9 w-auto object-contain"
+          />
+          <p class="text-sm text-ivory/65 leading-relaxed max-w-[320px]">
+            Бутиково издателство за персонализирани астрологични книги, създадени по точната ти натална карта с твърди корици и топъл златен печат.
+          </p>
+          <!-- Social Icons -->
+          <div class="flex items-center gap-3 pt-1">
+            <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full border border-ivory/15 hover:border-gold text-ivory/80 hover:text-gold-light flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4a3.9 3.9 0 01-1.4-.9c-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.2-.1-1.3-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4 1.2-.1 1.6-.1 4.8-.1M12 0C8.7 0 8.3 0 7.1.1 5.8.1 4.9.3 4.2.6c-.8.3-1.5.7-2.2 1.4C1.3 2.7.9 3.4.6 4.2.3 4.9.1 5.8.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.1 1.3.3 2.2.6 2.9.3.8.7 1.5 1.4 2.2.7.7 1.4 1.1 2.2 1.4.7.3 1.6.5 2.9.6 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c1.3-.1 2.2-.3 2.9-.6.8-.3 1.5-.7 2.2-1.4.7-.7 1.1-1.4 1.4-2.2.3-.7.5-1.6.6-2.9.1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.1-1.3-.3-2.2-.6-2.9a5.9 5.9 0 00-1.4-2.2A5.9 5.9 0 0019.8.6c-.7-.3-1.6-.5-2.9-.6C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook" class="w-10 h-10 rounded-full border border-ivory/15 hover:border-gold text-ivory/80 hover:text-gold-light flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12c0 5 3.7 9.1 8.4 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7C18.3 21.1 22 17 22 12z"/></svg>
+            </a>
+            <a href="#" aria-label="Pinterest" class="w-10 h-10 rounded-full border border-ivory/15 hover:border-gold text-ivory/80 hover:text-gold-light flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.4 9.3-.1-.8-.2-2 0-2.9.2-.8 1.2-5.1 1.2-5.1s-.3-.6-.3-1.5c0-1.4.8-2.5 1.9-2.5.9 0 1.3.7 1.3 1.5 0 .9-.6 2.2-.9 3.5-.3 1 .5 1.9 1.5 1.9 1.8 0 3.2-1.9 3.2-4.6 0-2.4-1.7-4.1-4.2-4.1-2.9 0-4.6 2.2-4.6 4.4 0 .9.3 1.8.8 2.3.1.1.1.2.1.3-.1.3-.3 1-.3 1.1-.1.2-.2.2-.4.1-1.3-.6-2.1-2.5-2.1-4 0-3.3 2.4-6.3 6.9-6.3 3.6 0 6.4 2.6 6.4 6 0 3.6-2.3 6.5-5.4 6.5-1.1 0-2.1-.6-2.4-1.2l-.7 2.5c-.2.9-.9 2-1.3 2.7 1 .3 2 .5 3.1.5 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="lg:col-span-2">
+          <h4 class="font-serif text-base text-ivory mb-4">Навигация</h4>
+          <ul class="space-y-2.5 text-sm text-ivory/65">
+            <li><a href="#create-book" class="hover:text-gold-light transition-colors">Създай книга</a></li>
+            <li><a href="#whats-inside" class="hover:text-gold-light transition-colors">Какво съдържа</a></li>
+            <li><a href="#editions" class="hover:text-gold-light transition-colors">Издания и цени</a></li>
+            <li><a href="#gift" class="hover:text-gold-light transition-colors">За подарък</a></li>
+            <li><a href="#reviews" class="hover:text-gold-light transition-colors">Отзиви</a></li>
+            <li><a href="#faq" class="hover:text-gold-light transition-colors">Въпроси</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Contacts -->
+        <div class="lg:col-span-3">
+          <h4 class="font-serif text-base text-ivory mb-4">Контакти и информация</h4>
+          <ul class="space-y-2.5 text-sm text-ivory/65">
+            <li>Имейл: <a href="mailto:hello@astromia.eu" class="text-ivory/90 hover:text-gold-light">hello@astromia.eu</a></li>
+            <li>Телефон: <a href="tel:+359882345678" class="text-ivory/90 hover:text-gold-light">+359 88 234 5678</a></li>
+            <li class="pt-2"><a href="#" class="hover:text-gold-light transition-colors">Доставка и връщане</a></li>
+            <li><a href="#" class="hover:text-gold-light transition-colors">Общи условия</a></li>
+            <li><a href="#" class="hover:text-gold-light transition-colors">Политика за поверителност</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="lg:col-span-3">
+          <h4 class="font-serif text-base text-ivory mb-3">Лунни писма и 10% отстъпка</h4>
+          <p class="text-xs text-ivory/65 leading-relaxed mb-4">
+            Абонирай се за месечните ни астрологични насоки и получи код за 10% отстъпка при първа поръчка.
+          </p>
+          <form onsubmit="event.preventDefault(); document.getElementById('nl-thanks').classList.remove('hidden'); this.reset();" class="space-y-2.5">
+            <input type="email" required placeholder="Твоят имейл адрес" class="w-full min-h-[44px] rounded-xl bg-ivory/10 border border-ivory/20 px-4 text-sm text-ivory placeholder:text-ivory/45 focus:outline-none focus:border-gold" />
+            <button type="submit" class="btn-gold w-full rounded-xl text-sm font-medium min-h-[44px]">Абонирай се</button>
+          </form>
+          <p id="nl-thanks" class="hidden text-xs text-gold-light mt-2">✦ Благодарим ти! Провери пощата си за кода.</p>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright & Payment Strip -->
+      <div class="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ivory/50">
+        <p>© 2026 Astromia. Всички права запазени. Разработено от Md. Mahbubur Rahman.</p>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <span class="px-2.5 py-1 rounded border border-ivory/15 text-ivory/70">Наложен платеж</span>
+          <span class="px-2.5 py-1 rounded border border-ivory/15 text-ivory/70">Visa</span>
+          <span class="px-2.5 py-1 rounded border border-ivory/15 text-ivory/70">Mastercard</span>
+          <span class="px-2.5 py-1 rounded border border-ivory/15 text-ivory/70">Еконт / Спиди</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Sticky Conversion Bar (appears cleanly on scroll on mobile) -->
+  <div id="mobile-sticky-cta" class="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-ivory/95 backdrop-blur-md border-t border-parchment px-4 py-3 translate-y-full transition-transform duration-300 shadow-[0_-8px_24px_rgba(23,29,43,0.08)]">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <p class="font-serif text-sm text-ink leading-tight">Книга Astromia</p>
+        <p class="text-xs text-gold-dark font-medium">от 79 лв. • Безплатен преглед</p>
+      </div>
+      <a href="#create-book" class="btn-luxury px-5 py-2.5 rounded-full text-xs font-medium whitespace-nowrap">
+        Създай книга →
+      </a>
+    </div>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- SLIDE-OVER ORDER / CHECKOUT DRAWER                    -->
+  <!-- ===================================================== -->
+  <div id="checkout-drawer-backdrop" class="hidden fixed inset-0 z-50 bg-ink/55 backdrop-blur-xs flex justify-end">
+    <div id="checkout-drawer" class="bg-ivory w-full max-w-[480px] h-full overflow-y-auto p-6 sm:p-8 shadow-2xl flex flex-col justify-between">
+      <div>
+        <!-- Drawer Header -->
+        <div class="flex items-center justify-between pb-5 border-b border-parchment mb-6">
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.2em] text-gold-dark font-semibold">Финализиране</p>
+            <h3 class="font-serif text-2xl text-ink">Твоята поръчка</h3>
+          </div>
+          <button type="button" onclick="closeCheckoutDrawer()" class="w-11 h-11 rounded-full border border-parchment flex items-center justify-center text-ink hover:border-ink" aria-label="Затвори">
+            ✕
+          </button>
+        </div>
+
+        <!-- Order Summary Card -->
+        <div class="bg-white border border-parchment rounded-2xl p-4 mb-6">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="font-serif text-base text-ink">Натална книга за <strong id="drawer-book-name">Елена</strong></p>
+              <p id="drawer-book-details" class="text-xs text-muted mt-0.5">Подаръчен комплект • Корица Нощно небе</p>
+              <p id="drawer-book-birth" class="text-xs text-muted mt-0.5">14.05.1993 • София, България</p>
+            </div>
+            <span id="drawer-price" class="font-serif text-lg text-ink shrink-0">99 лв.</span>
+          </div>
+          <div class="mt-3 pt-3 border-t border-parchment/80 flex items-center justify-between text-xs">
+            <span class="text-muted">Доставка (Еконт / Спиди)</span>
+            <span class="text-gold-dark font-medium">6.90 лв.</span>
+          </div>
+          <div class="mt-2 flex items-center justify-between text-sm font-semibold text-ink">
+            <span>Общо за плащане</span>
+            <span id="drawer-total" class="font-serif text-lg">105.90 лв.</span>
+          </div>
+        </div>
+
+        <!-- Checkout Form -->
+        <form id="checkout-form" onsubmit="event.preventDefault(); submitOrder();" class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-ink mb-1.5">Име и фамилия *</label>
+            <input type="text" required placeholder="напр. Елена Иванова" class="editorial-input w-full rounded-xl px-4 text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-medium text-ink mb-1.5">Телефон *</label>
+              <input type="tel" required placeholder="088 123 4567" class="editorial-input w-full rounded-xl px-4 text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-ink mb-1.5">Имейл *</label>
+              <input type="email" required placeholder="elena@email.bg" class="editorial-input w-full rounded-xl px-4 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-ink mb-1.5">Адрес или офис на Еконт / Спиди *</label>
+            <input type="text" required placeholder="гр. София, офис Еконт Лозенец" class="editorial-input w-full rounded-xl px-4 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-ink mb-2">Начин на плащане</label>
+            <div class="grid grid-cols-2 gap-2.5">
+              <label class="cursor-pointer">
+                <input type="radio" name="payment" value="cod" checked class="peer sr-only" />
+                <div class="touch-target rounded-xl border border-parchment peer-checked:border-gold peer-checked:bg-white flex items-center justify-center text-xs font-medium text-ink">
+                  Наложен платеж
+                </div>
+              </label>
+              <label class="cursor-pointer">
+                <input type="radio" name="payment" value="card" class="peer sr-only" />
+                <div class="touch-target rounded-xl border border-parchment peer-checked:border-gold peer-checked:bg-white flex items-center justify-center text-xs font-medium text-ink">
+                  С карта онлайн
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-gold w-full rounded-xl py-3.5 text-[15px] font-medium mt-2">
+            Потвърди поръчката ✦
+          </button>
+        </form>
+
+        <!-- Order Confirmation State -->
+        <div id="checkout-success" class="hidden text-center py-8 space-y-4 animate-fade-up">
+          <div class="w-14 h-14 rounded-full bg-gold/15 border border-gold text-gold-dark text-2xl flex items-center justify-center mx-auto">✦</div>
+          <h4 class="font-serif text-2xl text-ink">Благодарим ти за поръчката!</h4>
+          <p class="text-sm text-muted leading-relaxed">
+            Твоята персонализирана книга Astromia вече влезе за подготовка. Изпратихме потвърждение на посочения имейл адрес. Очаквай доставка до 3–5 работни дни.
+          </p>
+          <button type="button" onclick="closeCheckoutDrawer()" class="btn-luxury px-7 rounded-full text-sm font-medium mt-2">
+            Върни се към сайта
+          </button>
+        </div>
+      </div>
+
+      <p class="text-[11px] text-muted text-center pt-6 mt-6 border-t border-parchment">
+        100% сигурна поръчка • Преглед преди плащане при доставка
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================================================== -->
+  <!-- JAVASCRIPT: 4-Step Flow, Zodiac Engine & UI Polish    -->
+  <!-- ===================================================== -->
+  <script>
+    // State
+    const state = {
+      step: 1,
+      name: 'Елена',
+      day: 14,
+      month: 5,
+      year: 1993,
+      hour: 9,
+      minute: 30,
+      unknownTime: false,
+      place: 'София, България',
+      coverTheme: 'midnight',
+      edition: 'gift'
+    };
+
+    const editions = {
+      classic: { name: 'Класическо издание', price: 79, desc: 'Луксозни твърди корици със златен печат' },
+      gift: { name: 'Подаръчен комплект', price: 99, desc: 'Луксозен подаръчен комплект с кутия и златна панделка' },
+      bundle: { name: 'Твърди корици + PDF', price: 89, desc: 'Твърди корици + моментално дигитално PDF копие' }
+    };
+
+    const coverLabels = {
+      midnight: 'Нощно небе',
+      ivory: 'Слонова кост',
+      rose: 'Прашна роза'
+    };
+
+    const monthNames = ['', 'Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни', 'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'];
+
+    const zodiacData = [
+      { name: 'Козирог', symbol: '♑', element: 'Земя', sunDesc: 'Вътрешна сила, мъдрост, стремеж към високи цели и благородна сдържаност.', moon: 'Телец ♉', asc: 'Дева ♍' },
+      { name: 'Водолей', symbol: '♒', element: 'Въздух', sunDesc: 'Свободен дух, оригинално мислене, хуманност и вдъхновяваща визия за бъдещето.', moon: 'Везни ♎', asc: 'Близнаци ♊' },
+      { name: 'Риби', symbol: '♓', element: 'Вода', sunDesc: 'Дълбока интуиция, нежно въображение, състрадание и артистична душа.', moon: 'Рак ♋', asc: 'Скорпион ♏' },
+      { name: 'Овен', symbol: '♈', element: 'Огън', sunDesc: 'Смело сърце, естествен ентусиазъм, решителност и заразителна жизнена енергия.', moon: 'Лъв ♌', asc: 'Стрелец ♐' },
+      { name: 'Телец', symbol: '♉', element: 'Земя', sunDesc: 'Топлина, стабилност, изтънчен естетически усет и дълбока вярност към близките.', moon: 'Риби ♓', asc: 'Везни ♎' },
+      { name: 'Близнаци', symbol: '♊', element: 'Въздух', sunDesc: 'Жив ум, любознателност, лекота в общуването и магнетично обаяние.', moon: 'Водолей ♒', asc: 'Лъв ♌' },
+      { name: 'Рак', symbol: '♋', element: 'Вода', sunDesc: 'Топла грижовност, дълбоки чувства, силна връзка с дома и безпогрешна интуиция.', moon: 'Риби ♓', asc: 'Телец ♉' },
+      { name: 'Лъв', symbol: '♌', element: 'Огън', sunDesc: 'Щедро сърце, естествено сияние, творческа смелост и топла харизма.', moon: 'Стрелец ♐', asc: 'Везни ♎' },
+      { name: 'Дева', symbol: '♍', element: 'Земя', sunDesc: 'Прецизност, фин усет към детайла, аналитичен ум и искрена отдаденост.', moon: 'Козирог ♑', asc: 'Рак ♋' },
+      { name: 'Везни', symbol: '♎', element: 'Въздух', sunDesc: 'Стремеж към хармония, изискан вкус, дипломатичност и дарба да обединяваш хората.', moon: 'Близнаци ♊', asc: 'Водолей ♒' },
+      { name: 'Скорпион', symbol: '♏', element: 'Вода', sunDesc: 'Магнетична дълбочина, силна воля, емоционална искреност и трансформираща енергия.', moon: 'Рак ♋', asc: 'Козирог ♑' },
+      { name: 'Стрелец', symbol: '♐', element: 'Огън', sunDesc: 'Оптимизъм, жажда за знания и пътешествия, искреност и вдъхновяващ дух.', moon: 'Овен ♈', asc: 'Лъв ♌' }
+    ];
+
+    function getZodiac(day, month) {
+      const cutoffs = [20, 19, 21, 20, 21, 21, 23, 23, 23, 23, 22, 22];
+      let idx = month - 1;
+      if (day >= cutoffs[idx]) idx = (idx + 1) % 12;
+      return zodiacData[idx];
+    }
+
+    // Populate Day, Year, Hour, Minute Selects
+    function initSelects() {
+      const daySel = document.getElementById('input-day');
+      for (let d = 1; d <= 31; d++) {
+        const opt = document.createElement('option');
+        opt.value = d;
+        opt.textContent = d;
+        if (d === 14) opt.selected = true;
+        daySel.appendChild(opt);
+      }
+
+      const yearSel = document.getElementById('input-year');
+      for (let y = 2010; y >= 1945; y--) {
+        const opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        if (y === 1993) opt.selected = true;
+        yearSel.appendChild(opt);
+      }
+
+      const hourSel = document.getElementById('input-hour');
+      for (let h = 0; h <= 23; h++) {
+        const opt = document.createElement('option');
+        opt.value = h;
+        opt.textContent = String(h).padStart(2, '0') + ' ч.';
+        if (h === 9) opt.selected = true;
+        hourSel.appendChild(opt);
+      }
+
+      const minSel = document.getElementById('input-minute');
+      for (let m = 0; m < 60; m += 5) {
+        const opt = document.createElement('option');
+        opt.value = m;
+        opt.textContent = String(m).padStart(2, '0') + ' мин.';
+        if (m === 30) opt.selected = true;
+        minSel.appendChild(opt);
+      }
+    }
+
+    // Sync Live Previews (Hero + Builder Book Cover)
+    function syncLivePreviews() {
+      const cleanName = state.name.trim() || 'Елена';
+      const z = getZodiac(state.day, state.month);
+      const cityShort = (state.place || 'София').split(',')[0].trim();
+
+      document.getElementById('hero-book-name').textContent = cleanName;
+      document.getElementById('hero-excerpt-name').textContent = cleanName;
+      document.getElementById('hero-book-subtitle').textContent = `${state.day} ${monthNames[state.month]} • ${z.name}`;
+
+      document.getElementById('builder-book-name').textContent = cleanName;
+      document.getElementById('builder-book-meta').textContent = `${String(state.day).padStart(2,'0')}.${String(state.month).padStart(2,'0')}.${state.year} • ${cityShort}`;
+      document.getElementById('builder-zodiac-badge').textContent = `${z.name} ${z.symbol}`;
+      document.getElementById('computed-sign-inline').textContent = z.name;
+      document.getElementById('computed-element-inline').textContent = z.element;
+    }
+
+    // Cover Theme Switcher
+    function setCoverTheme(theme) {
+      state.coverTheme = theme;
+      const bookEl = document.getElementById('builder-book-cover');
+      bookEl.classList.remove('cover-midnight', 'cover-ivory', 'cover-rose');
+      bookEl.classList.add('cover-' + theme);
+
+      document.querySelectorAll('.cover-swatch').forEach(btn => {
+        if (btn.dataset.themeBtn === theme) {
+          btn.classList.remove('border', 'border-parchment');
+          btn.classList.add('border-2', 'border-gold');
+        } else {
+          btn.classList.remove('border-2', 'border-gold');
+          btn.classList.add('border', 'border-parchment');
+        }
+      });
+    }
+
+    // 4-Step Form Navigation
+    const stepLabels = [
+      '',
+      'Стъпка 1 от 4: Име на получателя',
+      'Стъпка 2 от 4: Дата на раждане',
+      'Стъпка 3 от 4: Час на раждане',
+      'Стъпка 4 от 4: Място на раждане'
+    ];
+
+    function goToStep(stepNum) {
+      state.step = stepNum;
+      document.querySelectorAll('.step-panel').forEach((el, idx) => {
+        el.classList.toggle('hidden', idx + 1 !== stepNum);
+      });
+
+      document.querySelectorAll('.step-tab').forEach(tab => {
+        const s = Number(tab.dataset.stepTab);
+        if (s === stepNum) {
+          tab.className = 'step-tab py-2 text-xs rounded-lg border border-gold bg-ivory text-ink font-semibold transition-all';
+        } else if (s < stepNum) {
+          tab.className = 'step-tab py-2 text-xs rounded-lg border border-gold/40 bg-ivory/40 text-gold-dark font-medium transition-all';
+        } else {
+          tab.className = 'step-tab py-2 text-xs rounded-lg border border-parchment text-muted transition-all';
+        }
+      });
+
+      document.getElementById('step-label-text').textContent = stepLabels[stepNum];
+      const pct = stepNum * 25;
+      document.getElementById('step-percent-text').textContent = pct + '%';
+      document.getElementById('step-progress-bar').style.width = pct + '%';
+
+      document.getElementById('btn-prev-step').classList.toggle('hidden', stepNum === 1);
+      document.getElementById('btn-next-step').classList.toggle('hidden', stepNum === 4);
+      document.getElementById('btn-generate-preview').classList.toggle('hidden', stepNum !== 4);
+    }
+
+    function nextStep() {
+      if (state.step < 4) goToStep(state.step + 1);
+    }
+
+    function prevStep() {
+      if (state.step > 1) goToStep(state.step - 1);
+    }
+
+    function setCity(city) {
+      state.place = city;
+      document.getElementById('input-place').value = city;
+      syncLivePreviews();
+    }
+
+    // Generate Dynamic SVG Natal Chart based on Birth Data
+    function buildNatalChartSVG(seed) {
+      const a1 = (seed * 37) % 360;
+      const a2 = (a1 + 118) % 360;
+      const a3 = (a1 + 235) % 360;
+      const a4 = (seed * 73 + 45) % 360;
+      const a5 = (seed * 19 + 160) % 360;
+
+      function pt(deg, r) {
+        const rad = (deg - 90) * Math.PI / 180;
+        return [150 + r * Math.cos(rad), 150 + r * Math.sin(rad)];
+      }
+
+      const [x1, y1] = pt(a1, 95);
+      const [x2, y2] = pt(a2, 95);
+      const [x3, y3] = pt(a3, 95);
+      const [x4, y4] = pt(a4, 95);
+      const [x5, y5] = pt(a5, 95);
+
+      const glyphs = ['♈','♉','♊','♋','♌','♍','♎','♏','♐','♑','♒','♓'];
+      let glyphMarkup = '';
+      for (let i = 0; i < 12; i++) {
+        const [gx, gy] = pt(i * 30 + 15, 124);
+        const [lx1, ly1] = pt(i * 30, 108);
+        const [lx2, ly2] = pt(i * 30, 140);
+        glyphMarkup += `<line x1="${lx1.toFixed(1)}" y1="${ly1.toFixed(1)}" x2="${lx2.toFixed(1)}" y2="${ly2.toFixed(1)}" stroke="#B9975B" stroke-width="0.7" opacity="0.55" />`;
+        glyphMarkup += `<text x="${gx.toFixed(1)}" y="${(gy + 4).toFixed(1)}" text-anchor="middle" font-size="11" fill="#8C6D35" opacity="0.9">${glyphs[i]}</text>`;
+      }
+
+      return `
+        <svg viewBox="0 0 300 300" class="w-full h-full">
+          <circle cx="150" cy="150" r="140" fill="#FAF6EE" stroke="#B9975B" stroke-width="1.2" />
+          <circle cx="150" cy="150" r="108" fill="none" stroke="#B9975B" stroke-width="0.9" opacity="0.8" />
+          <circle cx="150" cy="150" r="95" fill="none" stroke="#171D2B" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.35" />
+          <circle cx="150" cy="150" r="24" fill="none" stroke="#B9975B" stroke-width="0.8" opacity="0.7" />
+          ${glyphMarkup}
+          <!-- Aspect Lines -->
+          <polygon points="${x1.toFixed(1)},${y1.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)} ${x3.toFixed(1)},${y3.toFixed(1)}" fill="rgba(185,151,91,0.08)" stroke="#B9975B" stroke-width="1" />
+          <line x1="${x4.toFixed(1)}" y1="${y4.toFixed(1)}" x2="${x5.toFixed(1)}" y2="${y5.toFixed(1)}" stroke="#C5A4A0" stroke-width="1.1" stroke-dasharray="3 2" />
+          <line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x4.toFixed(1)}" y2="${y4.toFixed(1)}" stroke="#171D2B" stroke-width="0.7" opacity="0.45" />
+          <!-- Planets -->
+          <circle cx="${x1.toFixed(1)}" cy="${y1.toFixed(1)}" r="4.5" fill="#171D2B" stroke="#FAF6EE" stroke-width="1.5" />
+          <circle cx="${x2.toFixed(1)}" cy="${y2.toFixed(1)}" r="4" fill="#B9975B" stroke="#FAF6EE" stroke-width="1.5" />
+          <circle cx="${x3.toFixed(1)}" cy="${y3.toFixed(1)}" r="4" fill="#C5A4A0" stroke="#FAF6EE" stroke-width="1.5" />
+          <circle cx="${x4.toFixed(1)}" cy="${y4.toFixed(1)}" r="3.5" fill="#171D2B" />
+          <circle cx="${x5.toFixed(1)}" cy="${y5.toFixed(1)}" r="3.5" fill="#B9975B" />
+          <!-- Center Star -->
+          <path d="M150 138 L153 147 L162 150 L153 153 L150 162 L147 153 L138 150 L147 147 Z" fill="#B9975B" />
+        </svg>
+      `;
+    }
+
+    // Generate Full Free Personalized Preview
+    function generatePreview() {
+      const cleanName = state.name.trim() || 'Елена';
+      const z = getZodiac(state.day, state.month);
+      const timeStr = state.unknownTime ? 'Соларна карта' : `${String(state.hour).padStart(2,'0')}:${String(state.minute).padStart(2,'0')} ч.`;
+
+      document.getElementById('preview-heading-name').textContent = cleanName;
+      document.getElementById('order-inline-name').textContent = cleanName;
+      document.getElementById('preview-meta-summary').textContent = `${state.day} ${monthNames[state.month]} ${state.year} • ${timeStr} • ${state.place}`;
+
+      document.getElementById('preview-sun-sign').textContent = `${z.name} ${z.symbol}`;
+      document.getElementById('preview-sun-desc').textContent = z.sunDesc;
+      document.getElementById('preview-moon-sign').textContent = z.moon;
+      document.getElementById('preview-asc-sign').textContent = state.unknownTime ? 'Соларен профил ✦' : z.asc;
+
+      const seed = state.day * 13 + state.month * 31 + state.year + state.hour;
+      document.getElementById('dynamic-natal-chart-container').innerHTML = buildNatalChartSVG(seed);
+      document.getElementById('preview-chart-caption').textContent = `Небесната конфигурация в момента на раждането на ${cleanName}`;
+
+      document.getElementById('preview-chapter-title').textContent = `Слънце в ${z.name} — твоята вътрешна светлина`;
+      document.getElementById('preview-chapter-body').innerHTML = `
+        <p>${cleanName}, рождената ти карта разкрива рядко съчетание между земна устойчивост и фина интуиция. Слънцето в знак <strong>${z.name}</strong> ти дарява естествен усет към истинското и трайното в живота — независимо дали става дума за любов, приятелство или лично призвание.</p>
+        <p>В комбинация с Луната в <strong>${z.moon.split(' ')[0]}</strong>, ти преживяваш света дълбоко и искрено. Именно в моментите, когато се довериш на тихия си вътрешен глас, взимаш най-мъдрите решения и привличаш хората, които истински ценят присъствието ти.</p>
+      `;
+
+      const panel = document.getElementById('personalized-preview-panel');
+      panel.classList.remove('hidden');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Show cart badge
+      document.getElementById('header-cart-badge').classList.remove('hidden');
+      document.getElementById('mobile-cart-badge').classList.remove('hidden');
+    }
+
+    // Edition Selection
+    function selectEdition(key) {
+      state.edition = key;
+      const ed = editions[key];
+      document.getElementById('selected-edition-price').textContent = `${ed.price} лв.`;
+      document.getElementById('selected-edition-label').textContent = ed.desc;
+
+      document.querySelectorAll('.edition-option').forEach(card => {
+        if (card.dataset.editionCard === key) {
+          card.classList.remove('border', 'border-parchment');
+          card.classList.add('border-2', 'border-gold', 'bg-ivory/70');
+        } else {
+          card.classList.remove('border-2', 'border-gold', 'bg-ivory/70');
+          card.classList.add('border', 'border-parchment');
+        }
+      });
+    }
+
+    function chooseEditionAndScroll(key) {
+      selectEdition(key);
+      document.getElementById('create-book').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Open & Close Checkout Drawer
+    function openCheckoutDrawer() {
+      const ed = editions[state.edition];
+      const cleanName = state.name.trim() || 'Елена';
+      document.getElementById('drawer-book-name').textContent = cleanName;
+      document.getElementById('drawer-book-details').textContent = `${ed.name} • Корица ${coverLabels[state.coverTheme]}`;
+      document.getElementById('drawer-book-birth').textContent = `${String(state.day).padStart(2,'0')}.${String(state.month).padStart(2,'0')}.${state.year} • ${state.place}`;
+      document.getElementById('drawer-price').textContent = `${ed.price} лв.`;
+      document.getElementById('drawer-total').textContent = `${(ed.price + 6.9).toFixed(2)} лв.`;
+
+      document.getElementById('checkout-form').classList.remove('hidden');
+      document.getElementById('checkout-success').classList.add('hidden');
+      document.getElementById('checkout-drawer-backdrop').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckoutDrawer() {
+      document.getElementById('checkout-drawer-backdrop').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function submitOrder() {
+      document.getElementById('checkout-form').classList.add('hidden');
+      document.getElementById('checkout-success').classList.remove('hidden');
+    }
+
+    // Interactive Sample Spreads in "What's Inside"
+    const spreads = [
+      {
+        img: 'https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=700&q=80',
+        kicker: 'Глава I • Стр. 14',
+        title: 'Твоята лична небесна карта',
+        text: 'Детайлно графично изображение на разположението на всички 10 планети, домове и ключови аспекти в точния миг на твоето раждане.'
+      },
+      {
+        img: 'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=700&q=80',
+        kicker: 'Глава III • Стр. 96',
+        title: 'Венера, любов и съвместимост',
+        text: 'Разбери какъв е езикът ти на любовта, как привличаш хармонични отношения и кои зодиакални архетипи допълват сърцето ти.'
+      },
+      {
+        img: 'https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&w=700&q=80',
+        kicker: 'Глава VI • Стр. 184',
+        title: 'Годишни транзити и прогноза',
+        text: 'Месец по месец за следващата година — кои дати носят попътен вятър за нови проекти, любов и важни житейски стъпки.'
+      }
+    ];
+
+    function showSpread(index) {
+      const s = spreads[index];
+      document.getElementById('spread-image').src = s.img;
+      document.getElementById('spread-kicker').textContent = s.kicker;
+      document.getElementById('spread-title').textContent = s.title;
+      document.getElementById('spread-text').textContent = s.text;
+
+      document.querySelectorAll('.spread-tab').forEach(btn => {
+        if (Number(btn.dataset.spreadBtn) === index) {
+          btn.className = 'spread-tab shrink-0 px-3.5 py-2 rounded-full text-xs font-medium bg-ink text-ivory transition-colors';
+        } else {
+          btn.className = 'spread-tab shrink-0 px-3.5 py-2 rounded-full text-xs font-medium bg-white border border-parchment text-ink hover:border-gold transition-colors';
+        }
+      });
+    }
+
+    // FAQ Accordion
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.getAttribute('data-open') === 'true';
+      document.querySelectorAll('.faq-item').forEach(el => el.setAttribute('data-open', 'false'));
+      if (!isOpen) item.setAttribute('data-open', 'true');
+    }
+
+    // Initialize Everything on DOM Ready
+    document.addEventListener('DOMContentLoaded', () => {
+      initSelects();
+      syncLivePreviews();
+
+      // Hero Step 1 Form -> Seamless jump to Step 2 with Name filled
+      const heroForm = document.getElementById('hero-step1-form');
+      const heroInput = document.getElementById('hero-name-input');
+      heroInput.addEventListener('input', (e) => {
+        if (e.target.value.trim()) {
+          state.name = e.target.value;
+          document.getElementById('input-name').value = e.target.value;
+          syncLivePreviews();
+        }
+      });
+
+      heroForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (heroInput.value.trim()) {
+          state.name = heroInput.value.trim();
+          document.getElementById('input-name').value = state.name;
+          syncLivePreviews();
+          goToStep(2);
+        } else {
+          goToStep(1);
+        }
+        document.getElementById('create-book').scrollIntoView({ behavior: 'smooth' });
+      });
+
+      // Bind Builder Inputs
+      document.getElementById('input-name').addEventListener('input', (e) => {
+        state.name = e.target.value;
+        syncLivePreviews();
+      });
+      document.getElementById('input-day').addEventListener('change', (e) => {
+        state.day = Number(e.target.value);
+        syncLivePreviews();
+      });
+      document.getElementById('input-month').addEventListener('change', (e) => {
+        state.month = Number(e.target.value);
+        syncLivePreviews();
+      });
+      document.getElementById('input-year').addEventListener('change', (e) => {
+        state.year = Number(e.target.value);
+        syncLivePreviews();
+      });
+      document.getElementById('input-hour').addEventListener('change', (e) => {
+        state.hour = Number(e.target.value);
+      });
+      document.getElementById('input-minute').addEventListener('change', (e) => {
+        state.minute = Number(e.target.value);
+      });
+      document.getElementById('input-unknown-time').addEventListener('change', (e) => {
+        state.unknownTime = e.target.checked;
+        document.getElementById('time-inputs-wrapper').classList.toggle('opacity-45', e.target.checked);
+        document.getElementById('time-inputs-wrapper').classList.toggle('pointer-events-none', e.target.checked);
+      });
+      document.getElementById('input-place').addEventListener('input', (e) => {
+        state.place = e.target.value;
+        syncLivePreviews();
+      });
+
+      // Mobile Menu Toggle
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+
+      menuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        iconOpen.classList.toggle('hidden', !isHidden);
+        iconClose.classList.toggle('hidden', isHidden);
+        menuBtn.setAttribute('aria-expanded', String(!isHidden));
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        });
+      });
+
+      // Sticky Mobile Bar & Header Elevation on Scroll
+      const stickyBar = document.getElementById('mobile-sticky-cta');
+      const header = document.getElementById('site-header');
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        header.classList.toggle('shadow-sm', y > 20);
+        if (y > 520) {
+          stickyBar.classList.remove('translate-y-full');
+        } else {
+          stickyBar.classList.add('translate-y-full');
+        }
+      }, { passive: true });
+
+      // Close checkout drawer when clicking backdrop
+      document.getElementById('checkout-drawer-backdrop').addEventListener('click', (e) => {
+        if (e.target.id === 'checkout-drawer-backdrop') closeCheckoutDrawer();
+      });
+    });
+  </script>
+</body>
+</html>

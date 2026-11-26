@@ -1,0 +1,7 @@
+<svg class="pointer-events-none absolute -top-24 -right-24 w-[520px] h-[520px] text-gold/15 hidden md:block" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="185" stroke="currentColor" stroke-width="0.7" stroke-dasharray="3 5"></circle>
+        <circle cx="200" cy="200" r="142" stroke="currentColor" stroke-width="0.6"></circle>
+        <circle cx="200" cy="200" r="96" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 6"></circle>
+        <line x1="200" y1="8" x2="200" y2="392" stroke="currentColor" stroke-width="0.5"></line>
+        <line x1="8" y1="200" x2="392" y2="200" stroke="currentColor" stroke-width="0.5"></line>
+      </svg>
